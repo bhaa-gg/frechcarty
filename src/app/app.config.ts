@@ -1,9 +1,32 @@
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
-
+import {
+  ApplicationConfig
+  , importProvidersFrom, provideZoneChangeDetection
+} from '@angular/core';
+import { provideRouter, withViewTransitions } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
+import {
+  BrowserModule,
+  provideClientHydration
+  , withEventReplay
+} from '@angular/platform-browser';
+import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
+import { API_BASE_URL } from './token/api-token';
+import { authInterceptor } from './shared/interceptors/auth-interceptor.service';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideZoneChangeDetection({ eventCoalescing: true }), provideRouter(routes), provideClientHydration(withEventReplay())]
+  providers: [provideZoneChangeDetection({ eventCoalescing: true })
+    , provideRouter(routes
+      , withViewTransitions(),
+    )
+    , importProvidersFrom([BrowserAnimationsModule, BrowserModule])
+    ,
+  provideHttpClient(withFetch() , withInterceptors([authInterceptor]))
+    , provideClientHydration(withEventReplay()),
+  {
+    provide: API_BASE_URL,
+    useValue: "https://ecommerce.routemisr.com/api/v1"
+  }
+
+  ]
 };

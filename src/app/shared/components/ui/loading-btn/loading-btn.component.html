@@ -1,0 +1,6 @@
+
+<button [attr.type]="type" [disabled]="isLoading || disabled"
+    class="text-white   bg-primary-400 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 cursor-pointer transition-all font-semibold rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-prborder-primary-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+    <ng-content></ng-content>
+    <i *ngIf="isLoading" class="fa-solid fa-spinner animate-spin ml-2"></i>
+</button>

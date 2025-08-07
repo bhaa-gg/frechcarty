@@ -1,0 +1,40 @@
+@if (!API_ERROR) {
+<section class="space-y-8">
+  <div class="grid gap-8 grid-cols-1 lg:grid-cols-5">
+    <div class="col-span-2  border border-primary-400 rounded-2xl">
+      <owl-carousel-o [options]="customOptions">
+        @for (img of this.theProductImgs; track img; let i = $index) {
+        <ng-template carouselSlide [dataDot]="getDotImage(img)">
+          <img [src]="img" class="w-full h-[600px] rounded-2xl" alt="Product Image">
+        </ng-template>
+        }
+      </owl-carousel-o>
+    </div>
+    <div class="col-span-3 flex items-center justify-center">
+      <div class="space-y-4 w-full relative rounded-2xl p-4 shadow-2xl">
+        <div class="absolute top-4 right-4">
+          <Eco-add-to-which-list />
+        </div>
+        <h2 class="text-2xl font-semibold">{{this.theProduct?.title}}</h2>
+        <p class="p-2 text-sm text-gray-400 font-bold">{{this.theProduct?.description}}</p>
+        <p class="  text-primary-600 font-bold">{{this.theProduct?.category?.name}}</p>
+        <div class="flex items-center justify-between ">
+          <p class="text-gray-600 text-sm font-semibold">{{theProduct?.price | currency : 'Egp'}} </p>
+          <p class="text-gray-600 text-sm font-semibold"> <i class="fa-solid fa-star text-amber-400"></i>
+            {{theProduct?.ratingsAverage}}</p>
+        </div>
+        <Eco-add-to-cart-btn [productId]="this.theProduct?.id+''" />
+      </div>
+    </div>
+  </div>
+  <div #relate class="h-[.5px] w-full bg-gray-300"></div>
+  @defer (on viewport(relate) ) {
+  <Eco-relate-products [Title]="'Relate Products'" [Products]="theRelatedProducts" />
+  }
+  @placeholder {
+  <div class="flex items-center justify-center">loading...</div>
+  }
+</section>
+}@else{
+<div class="flex w-full text-6xl text-red-800 items-center justify-center">API Error</div>
+}

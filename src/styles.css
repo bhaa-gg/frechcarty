@@ -1,1 +1,74 @@
-/* You can add global styles to this file, and also import other style files */
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap");
+@import "tailwindcss";
+@import "flowbite/src/themes/default";
+@plugin "flowbite/plugin";
+@source "../node_modules/flowbite";
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --font-family: "Encode Sans Expanded", sans-serif;
+}
+
+body {
+  padding-top: 80px;
+  font-family: var(--font-family) !important;
+}
+
+@theme {
+  --color-primary-50: #f0fdf4;
+  --color-primary-100: #dcfce7;
+  --color-primary-200: #bbf7d0;
+  --color-primary-300: #86efac;
+  --color-primary-400: #4ade80;
+  --color-primary-500: #22c55e;
+  --color-primary-600: #16a34a;
+  --color-primary-700: #15803d;
+  --color-primary-800: #166534;
+  --color-primary-900: #14532d;
+
+  --font-sans: "Inter", "ui-sans-serif", "system-ui", "-apple-system",
+    "system-ui", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans",
+    "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-body: "Inter", "ui-sans-serif", "system-ui", "-apple-system",
+    "system-ui", "Segoe UI", "Roboto", "Helvetica Neue", "Arial", "Noto Sans",
+    "sans-serif", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    "Noto Color Emoji";
+  --font-mono: "ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas",
+    "Liberation Mono", "Courier New", "monospace";
+}
+
+
+
+
+/* Style for the dots container */
+.owl-dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+/* Style for each dot */
+.owl-dot {
+  display: inline-block;
+  margin: 0 5px;
+}
+
+/* Style for the image inside the dot */
+.dot-image {
+  width: 50px; /* Adjust size as needed */
+  height: 50px;
+  object-fit: cover;
+  border-radius: 8px; /* Optional: rounded corners */
+  border: 2px solid transparent;
+  transition: border 0.3s ease;
+}
+
+/* Style for the active dot */
+.owl-dot.active .dot-image {
+  border: 2px solid #3b82f6; /* Highlight active dot with a border */
+}
+
+/* Optional: Hover effect */
+.owl-dot .dot-image:hover {
+  border: 2px solid #93c5fd;
+}

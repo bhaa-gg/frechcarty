@@ -1,0 +1,10 @@
+<section class="space-y-4">
+    <h2 class="text-4xl font-semibold text-primary-500 " >{{Title}}</h2>
+    <owl-carousel-o class [options]="customOptions">
+        @for (item of Products; track item._id) {
+        <ng-template carouselSlide>
+            <Eco-product-card [product]="item" />
+        </ng-template>
+        }
+    </owl-carousel-o>
+</section>

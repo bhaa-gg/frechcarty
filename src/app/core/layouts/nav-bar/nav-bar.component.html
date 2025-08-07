@@ -1,0 +1,80 @@
+<nav class="bg-white absolute top-0 left-0 w-full z-20 shadow border-gray-200 dark:bg-gray-900">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <div class="flex   relative items-center gap-6">
+            <a routerLink="" class="flex items-center space-x-3 rtl:space-x-reverse">
+                <img src="icons/freshcart-logo.svg" class="h-8" alt="Flowbite Logo" />
+                <!-- <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Flowbite</span> -->
+            </a>
+
+            <div class=" top-full  md:static  absolute hidden w-full md:block md:w-auto" id="navbar-default">
+                <ul
+                    class="font-medium  flex flex-col p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                    <li >
+                        <a routerLinkActive="text-primary-500" [routerLink]="['home']"
+                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                            aria-current="page">
+                            Home <i class="fa-solid fa-house"></i>
+                        </a>
+                    </li>  
+
+
+                    @if (UserData | async) {
+                    <li>
+                        <a routerLinkActive="text-primary-500" [routerLink]="['cart']"
+                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                            Cart <i class="fa-solid fa-cart-shopping"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a routerLinkActive="text-primary-500" [routerLink]="['products']"
+                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Products
+                            <i class="fa-solid fa-bag-shopping"></i> </a>
+                    </li>
+                    <li>
+                        <a routerLinkActive="text-primary-500" [routerLink]="['categories']"
+                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Categories</a>
+                    </li>
+                    <li>
+                        <a routerLinkActive="text-primary-500" [routerLink]="['brands']"
+                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Brands</a>
+                    </li>
+                    }
+
+                </ul>
+
+            </div>
+        </div>
+        <div class="md:flex ms-auto hidden items-center gap-6">
+            <ul class="flex items-center gap-4">
+                <li class="cursor-pointer"><i><i class="fa-brands fa-facebook"></i></i></li>
+                <li class="cursor-pointer"><i><i class="fa-brands fa-instagram"></i></i></li>
+                <li class="cursor-pointer"><i><i class="fa-brands fa-youtube"></i></i></li>
+                <li class="cursor-pointer"><i><i class="fa-brands fa-linkedin"></i></i></li>
+                <li class="cursor-pointer"><i><i class="fa-brands fa-tiktok"></i></i></li>
+            </ul>
+            <ul class="flex items-center gap-2">
+                @if (UserData | async) {
+                <li class="">
+                    <p (click)="signOut()"
+                        class="block cursor-pointer py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                        routerLinkActive="text-primary-500" routerLink="auth">Signout <i
+                            class="fa-solid fa-right-from-bracket"></i> </p>
+                </li>
+                }
+                @else {
+                <li class="">
+                    <a class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                        routerLinkActive="text-primary-500" routerLink="auth/register">Register</a>
+                </li>
+                <li class="">
+                    <a class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                        routerLinkActive="text-primary-500" routerLink="auth/login">Login</a>
+                </li>
+                }
+
+            </ul>
+
+        </div>
+        <Eco-sidebar [UserData]="UserData" />
+    </div>
+</nav>

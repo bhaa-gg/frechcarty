@@ -38,9 +38,6 @@ body {
     "Liberation Mono", "Courier New", "monospace";
 }
 
-
-
-
 /* Style for the dots container */
 .owl-dots {
   text-align: center;
@@ -71,4 +68,7 @@ body {
 /* Optional: Hover effect */
 .owl-dot .dot-image:hover {
   border: 2px solid #93c5fd;
+}
+.custom-toast {
+  background-image: none !important;
 }

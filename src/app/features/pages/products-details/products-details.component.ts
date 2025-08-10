@@ -7,6 +7,7 @@ import { CommonModule } from '@angular/common';
 import { AddToWhichListComponent } from "../../../shared/components/business/add-to-which-list/add-to-which-list.component";
 import { AddToCartBtnComponent } from "../../../shared/components/business/add-to-cart-btn/add-to-cart-btn.component";
 import { RelateProductsComponent } from "./components/relate-products/relate-products.component";
+import { CartService } from '../../../shared/services/cart/cart.service';
 
 @Component({
   selector: 'Eco-products-details',
@@ -17,6 +18,10 @@ import { RelateProductsComponent } from "./components/relate-products/relate-pro
 export class ProductsDetailsComponent implements OnInit {
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _productService = inject(ProductService);
+
+  private readonly _cartService = inject(CartService)
+  loadingBtn: string = ''
+
 
   theProduct!: Product
   API_ERROR: boolean = false
@@ -69,7 +74,7 @@ export class ProductsDetailsComponent implements OnInit {
           this.getRelatedProds(res?.data?.category._id)
       }, error: (err) => {
         console.log(err);
-        
+
         this.API_ERROR = true
       }
     })
@@ -89,5 +94,22 @@ export class ProductsDetailsComponent implements OnInit {
       }
     })
   }
-
+  addToCart(id: string) {
+    this.loadingBtn = id
+    this._cartService.addProductToCart(id).subscribe(
+      {
+        next: (res) => {
+          console.log(res);
+          this.loadingBtn = ''
+        },
+        error: (err) => {
+          this.loadingBtn = ''
+          console.log(err);
+        },
+        complete: () => {
+          this.loadingBtn = ''
+        }
+      }
+    )
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Product } from '../../../interfaces/product';
 import { CurrencyPipe } from '@angular/common';
 import { CheckHideAuthDirective } from '../../../directives/check-hide-auth.directive';
@@ -15,5 +15,15 @@ import { AddToCartBtnComponent } from "../../business/add-to-cart-btn/add-to-car
 export class ProductCardComponent {
 
   @Input({ required: true, alias: 'product' }) product !: Product | undefined
-  
+  @Output() addToCartFire_2: EventEmitter<string> = new EventEmitter<string>();
+
+  @Input() btnLoading: string='';
+
+
+
+  addToCart(id: string) {
+    this.addToCartFire_2.emit(id);
+  }
+
+
 }

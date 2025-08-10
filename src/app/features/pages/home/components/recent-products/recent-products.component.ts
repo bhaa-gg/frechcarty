@@ -2,6 +2,8 @@ import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../../../../shared/services/product/product.service';
 import { Product } from '../../../../../shared/interfaces/product';
 import { ProductCardComponent } from "../../../../../shared/components/ui/product-card/product-card.component";
+import { CartService } from '../../../../../shared/services/cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'Eco-recent-products',
@@ -10,13 +12,17 @@ import { ProductCardComponent } from "../../../../../shared/components/ui/produc
   styleUrl: './recent-products.component.css'
 })
 export class RecentProductsComponent implements OnInit {
-
-
-
   products !: Product[]
-
   private readonly _productService = inject(ProductService)
+  private readonly _cartService = inject(CartService)
+  loadingBtn: string = ''
+
+
+  _toaster = inject(ToastrService)
+
+
   constructor() { }
+
 
 
   getProducts() {
@@ -35,6 +41,41 @@ export class RecentProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts()
+  }
+
+
+  addToCart(id: string) {
+    this.loadingBtn = id
+    this._cartService.addProductToCart(id).subscribe(
+      {
+        next: (res) => {
+          console.log(res);
+          this.loadingBtn = ''
+          this._toaster.success(res.message , '', {
+            messageClass: 'text-sm font-semibold ',
+          });
+//           this._toaster.success(
+//             `
+// <div class="flex items-center justify-center">
+// <img src="https://www.svgrepo.com/show/533814/honey.svg" class="size-12" alt="icon" />
+//     <p class="text-sm font-semibold " >${res.message}</p>
+// </div>`,
+//             '',
+//             {
+//               enableHtml: true,
+//               toastClass: 'ngx-toastr bg-none custom-toast', // override default class
+//             }
+//           );
+        },
+        error: (err) => {
+          this.loadingBtn = ''
+          console.log(err);
+        },
+        complete: () => {
+          this.loadingBtn = ''
+        }
+      }
+    )
   }
 
 }

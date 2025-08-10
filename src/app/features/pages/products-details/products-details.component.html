@@ -23,7 +23,7 @@
           <p class="text-gray-600 text-sm font-semibold"> <i class="fa-solid fa-star text-amber-400"></i>
             {{theProduct?.ratingsAverage}}</p>
         </div>
-        <Eco-add-to-cart-btn [productId]="this.theProduct?.id+''" />
+        <Eco-add-to-cart-btn [btnLoading]="loadingBtn"  (addToCartFire_1)="addToCart(this.theProduct?.id||'')" [productId]="this.theProduct?.id+''" />
       </div>
     </div>
   </div>

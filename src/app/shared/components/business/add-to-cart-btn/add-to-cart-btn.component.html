@@ -1,9 +1,15 @@
 @if(template === 'icon'){
-<button [disabled]="btnLoading" (click)="onClick();$event.stopPropagation()" title="Add to cart"
-    class="cursor-pointer  text-base transition-all font-semibold hover:text-primary-700"><i
-        class="fa-solid  fa-cart-shopping"></i> </button>
+<button [disabled]="btnLoading == this.productId" (click)="onClick();$event.stopPropagation()" title="Add to cart"
+    class="cursor-pointer  text-base transition-all font-semibold hover:text-primary-700">
+    @if(btnLoading == this.productId){
+    <i class="fa-solid  fa-spinner animate-spin"></i>
+    }@else{
+    <i class="fa-solid  fa-cart-shopping"></i>
+    }
+</button>
 }@else{
-<button [disabled]="btnLoading" (click)="onClick();$event.stopPropagation()" title="Add to cart"
+<button [disabled]="btnLoading == this.productId" (click)="onClick();$event.stopPropagation()" title="Add to cart"
     class="cursor-pointer  w-full rounded-xl bg-primary-500 hover:bg-primary-400 py-2    text-base transition-all font-semibold text-white">
-    Add to cart </button>
+    Add to cart <i *ngIf="btnLoading" class="fa-solid  fa-spinner animate-spin"></i> </button>
 }
+

@@ -13,6 +13,8 @@ import {
 import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/http';
 import { API_BASE_URL } from './token/api-token';
 import { authInterceptor } from './shared/interceptors/auth-interceptor.service';
+import { ToastrModule } from 'ngx-toastr';
+import { provideNoopAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true })
@@ -21,8 +23,15 @@ export const appConfig: ApplicationConfig = {
     )
     , importProvidersFrom([BrowserAnimationsModule, BrowserModule])
     ,
-  provideHttpClient(withFetch() , withInterceptors([authInterceptor]))
+  provideHttpClient(withFetch(), withInterceptors([authInterceptor]))
     , provideClientHydration(withEventReplay()),
+  provideNoopAnimations(), importProvidersFrom(
+    ToastrModule.forRoot({
+      timeOut: 3000,
+      positionClass: 'toast-top-right',
+      // preventDuplicates: true,
+    })
+  ),
   {
     provide: API_BASE_URL,
     useValue: "https://ecommerce.routemisr.com/api/v1"

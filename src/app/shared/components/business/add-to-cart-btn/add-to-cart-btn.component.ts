@@ -1,9 +1,10 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, output } from '@angular/core';
 import { CartService } from '../../../services/cart/cart.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'Eco-add-to-cart-btn',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './add-to-cart-btn.component.html',
   styleUrl: './add-to-cart-btn.component.css'
 })
@@ -12,25 +13,15 @@ export class AddToCartBtnComponent {
   @Input() template !: "icon" | "Btn"
   @Input({ required: true }) productId !: string
   private _cartService = inject(CartService)
+  @Input() btnLoading!: string
 
-  btnLoading: boolean = false
+
+
+  @Output() addToCartFire_1: EventEmitter<string> = new EventEmitter<string>();
+
+
 
   onClick() {
-    this.btnLoading = true
-    this._cartService.addProductToCart(this.productId).subscribe(
-      {
-        next: (res) => {
-          console.log(res);
-          this.btnLoading = false
-        },
-        error: (err) => {
-          this.btnLoading = false
-          console.log(err);
-        },
-        complete: () => {
-          this.btnLoading = false
-        }
-      }
-    )
+    this.addToCartFire_1.emit(this.productId)
   }
 }

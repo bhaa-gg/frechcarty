@@ -13,65 +13,85 @@ export class CartComponent implements OnInit {
 
 
 
-
+  loading: boolean = false
   private readonly _cartService = inject(CartService)
-
   cart!: CartResponse
-
   ngOnInit(): void {
     this.getCart()
+
   }
 
 
 
   getCart() {
-    return this._cartService.getCart().subscribe({
+    this.loading = true
+    this._cartService.getCart().subscribe()
+    this._cartService.cart$.subscribe({
       next: (res) => {
-        console.log({ cart: res });
         this.cart = res
-      },
-      error: (err) => {
-        console.log(err);
-      },
-      complete: () => {
-
       }
     })
   }
   removeProductFromCart(id: string) {
-    this._cartService.deleteProductFromCart(id).subscribe({
-      next: (res) => {
-        console.log(res);
-        this.cart = res
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    // this.loading = true
+    // this._cartService.deleteProductFromCart(id).subscribe({
+    //   next: (res) => {
+    //     console.log(res);
+    //     this.cart = res
+    //     this.loading = false
+    //   },
+    //   error: (err) => {
+    //     console.log(err);
+    //     this.loading = false
+    //   }, complete: () => {
+    //     this.loading = false
+    //   }
+    // })
+
+
+    this._cartService.deleteProductFromCart2(id).subscribe()
+
+
   }
   updateCartCont(id: string, count: string) {
-    this._cartService.updateCartQuantity(id, count).subscribe({
-      next: (res) => {
-        this.cart = res
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    this.loading = true
+    this._cartService.updateCartQuantity2(id, count).subscribe(
+      //   {
+      //   next: (res) => {
+      //     this.cart = res
+      //     this.loading = false
+      //   },
+      //   error: (err) => {
+      //     console.log(err);
+      //     this.loading = false
+      //   },
+      //   complete: () => {
+      //     this.loading = false
+      //   }
+      // }
+    )
   }
 
 
 
 
   clearCart() {
-    this._cartService.clearCart().subscribe({
-      next: (res) => {
-        console.log(res);
-        this.cart = res
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
+    this.loading = true
+    this._cartService.clearCart2().subscribe(
+      //   {
+      //   next: (res) => {
+      //     console.log(res);
+      //     this.cart = res
+      //     this.loading = false
+      //   },
+      //   error: (err) => {
+      //     console.log(err);
+      //     this.loading = false
+      //   },
+      //   complete: () => {
+      //     this.loading = false
+      //   }
+      // }
+    )
   }
 }

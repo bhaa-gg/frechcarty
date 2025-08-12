@@ -1,6 +1,7 @@
 @if(template === 'icon'){
 <button [disabled]="btnLoading == this.productId" (click)="onClick();$event.stopPropagation()" title="Add to cart"
-    class="cursor-pointer  text-base transition-all font-semibold hover:text-primary-700">
+[class.hidden]="inCart"
+class="cursor-pointer  text-base transition-all font-semibold hover:text-primary-700">
     @if(btnLoading == this.productId){
     <i class="fa-solid  fa-spinner animate-spin"></i>
     }@else{

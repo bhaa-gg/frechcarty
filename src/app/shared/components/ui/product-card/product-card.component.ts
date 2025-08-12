@@ -17,7 +17,8 @@ export class ProductCardComponent {
   @Input({ required: true, alias: 'product' }) product !: Product | undefined
   @Output() addToCartFire_2: EventEmitter<string> = new EventEmitter<string>();
 
-  @Input() btnLoading: string='';
+  @Input() btnLoading: string = '';
+  @Input({ required: true }) inCart!: boolean
 
 
 

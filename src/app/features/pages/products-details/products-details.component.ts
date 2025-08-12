@@ -96,7 +96,7 @@ export class ProductsDetailsComponent implements OnInit {
   }
   addToCart(id: string) {
     this.loadingBtn = id
-    this._cartService.addProductToCart(id).subscribe(
+    this._cartService.addProductToCart2(id).subscribe(
       {
         next: (res) => {
           console.log(res);
@@ -112,4 +112,10 @@ export class ProductsDetailsComponent implements OnInit {
       }
     )
   }
+
+
+
+
+
+
 }

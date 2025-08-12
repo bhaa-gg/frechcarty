@@ -1,5 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output, output } from '@angular/core';
-import { CartService } from '../../../services/cart/cart.service';
+import { Component, EventEmitter,  Input, Output  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -12,9 +11,9 @@ import { CommonModule } from '@angular/common';
 export class AddToCartBtnComponent {
   @Input() template !: "icon" | "Btn"
   @Input({ required: true }) productId !: string
-  private _cartService = inject(CartService)
   @Input() btnLoading!: string
 
+  @Input({ required: true }) inCart!: boolean
 
 
   @Output() addToCartFire_1: EventEmitter<string> = new EventEmitter<string>();

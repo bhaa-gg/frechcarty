@@ -8,6 +8,7 @@ import { AddToWhichListComponent } from "../../../shared/components/business/add
 import { AddToCartBtnComponent } from "../../../shared/components/business/add-to-cart-btn/add-to-cart-btn.component";
 import { RelateProductsComponent } from "./components/relate-products/relate-products.component";
 import { CartService } from '../../../shared/services/cart/cart.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'Eco-products-details',
@@ -18,9 +19,10 @@ import { CartService } from '../../../shared/services/cart/cart.service';
 export class ProductsDetailsComponent implements OnInit {
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _productService = inject(ProductService);
-
+  inCart!: boolean
   private readonly _cartService = inject(CartService)
   loadingBtn: string = ''
+ private readonly _toaster = inject(ToastrService)
 
 
   theProduct!: Product
@@ -53,13 +55,20 @@ export class ProductsDetailsComponent implements OnInit {
   ngOnInit(): void {
     this.getId()
   }
-
+  getItemInCart(id: string) {
+    this._cartService.cart$.subscribe({
+      next: (res) => {
+        this.inCart = res.data.products.find((item: any) => id == item.product._id || id == item.product)
+      }
+    })
+  }
 
   getId() {
     this._activatedRoute.paramMap.subscribe({
       next: (res) => {
         this.theProductId = res.get('id')!
         this.getProdDetails(this.theProductId)
+        this.getItemInCart(this.theProductId)
       }
     })
   }
@@ -115,7 +124,27 @@ export class ProductsDetailsComponent implements OnInit {
 
 
 
-
+ removeProductFromCart(id: string) {
+    this.loadingBtn = id
+    this._cartService.deleteProductFromCart2(id).subscribe(
+      {
+        next: (res) => {
+          console.log(res);
+          this.loadingBtn = ''
+          this._toaster.info("Product removed from cart", '', {
+            messageClass: 'text-sm font-semibold ',
+          });
+        },
+        error: (err) => {
+          this.loadingBtn = ''
+          console.log(err);
+        },
+        complete: () => {
+          this.loadingBtn = ''
+        }
+      }
+    )
+  }
 
 
 }

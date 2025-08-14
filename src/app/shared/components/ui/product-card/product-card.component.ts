@@ -16,14 +16,21 @@ export class ProductCardComponent {
 
   @Input({ required: true, alias: 'product' }) product !: Product | undefined
   @Output() addToCartFire_2: EventEmitter<string> = new EventEmitter<string>();
+  @Output() deleteFromCart_2: EventEmitter<string> = new EventEmitter<string>();
 
   @Input() btnLoading: string = '';
-  @Input({ required: true }) inCart!: boolean
+  @Input() showSide: boolean  =true;
+  @Input() inCart!: boolean
 
 
 
   addToCart(id: string) {
     this.addToCartFire_2.emit(id);
+  }
+
+
+  deleteFromCart(id: string) {
+    this.deleteFromCart_2.emit(id);
   }
 
 

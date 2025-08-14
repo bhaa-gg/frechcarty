@@ -18,10 +18,9 @@ export class CartComponent implements OnInit {
   cart!: CartResponse
   ngOnInit(): void {
     this.getCart()
-
   }
 
-
+  
 
   getCart() {
     this.loading = true

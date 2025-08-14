@@ -1,8 +1,6 @@
 <!-- <Eco-product-card [product]="products?.at(0)"></Eco-product-card> -->
-
 <div class="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5 ">
     @for (prod of this.products; track prod._id ) {
-        
-    <Eco-product-card  [inCart]="cartIds.includes(prod._id)" [btnLoading]="loadingBtn" (addToCartFire_2)="addToCart($event)" [product]="prod"></Eco-product-card>
+    <Eco-product-card  [inCart]="cartIds.includes(prod._id)" [btnLoading]="loadingBtn" (addToCartFire_2)="addToCart($event)" (deleteFromCart_2)="removeProductFromCart($event)" [product]="prod"></Eco-product-card>
     }
-</div>
+</div> 

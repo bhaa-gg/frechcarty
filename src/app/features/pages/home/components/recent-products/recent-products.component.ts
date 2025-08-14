@@ -19,7 +19,7 @@ export class RecentProductsComponent implements OnInit {
   cartIds!: string[]
 
 
-  _toaster = inject(ToastrService)
+ private readonly _toaster = inject(ToastrService)
   constructor() { }
 
   getProducts() {
@@ -45,7 +45,8 @@ export class RecentProductsComponent implements OnInit {
   getItemInCart() {
     this._cartService.cart$.subscribe({
       next: (res) => {
-        this.cartIds = res.data.products.map((item: any) => item.product._id)
+        this.cartIds = res.data.products.map((item: any) => item.product._id || item.product)
+        console.log({ cartIds: this.cartIds });
       }
     })
   }
@@ -85,5 +86,31 @@ export class RecentProductsComponent implements OnInit {
       }
     )
   }
+
+
+
+
+  removeProductFromCart(id: string) {
+    this.loadingBtn = id
+    this._cartService.deleteProductFromCart2(id).subscribe(
+      {
+        next: (res) => {
+          console.log(res);
+          this.loadingBtn = ''
+          this._toaster.info("Product removed from cart", '', {
+            messageClass: 'text-sm font-semibold ',
+          });
+        },
+        error: (err) => {
+          this.loadingBtn = ''
+          console.log(err);
+        },
+        complete: () => {
+          this.loadingBtn = ''
+        }
+      }
+    )
+  }
+
 
 }

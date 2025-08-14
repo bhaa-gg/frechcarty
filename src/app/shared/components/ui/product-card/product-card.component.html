@@ -1,11 +1,12 @@
 <div
-    class="max-w-sm relative overflow-hidden group  hover:shadow-primary-500 hover:shadow-2xl transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+    class="max-w-sm relative  overflow-hidden group  hover:shadow-primary-500 hover:shadow-2xl transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
 
-    <div ecoCheckHideAuth
-        class="absolute top-0  group-hover:right-0  group-hover:top-4 -right-[40%] transition-all p-4 rounded-s-2xl bg-primary-200 ">
+    <div ecoCheckHideAuth 
+        class=" absolute {{showSide &&  'group-hover:right-0  group-hover:top-4'}} top-0   -right-[40%] transition-all p-4 rounded-s-2xl bg-primary-200 ">
         <ul class="flex flex-col gap-2">
             <li>
-                <Eco-add-to-cart-btn   [inCart]="inCart" [btnLoading]="btnLoading"  (addToCartFire_1)="addToCart(this.product?._id||'')"
+                <Eco-add-to-cart-btn (deleteFromCart_1)="deleteFromCart(this.product?._id||'')" [inCart]="inCart"
+                    [btnLoading]="btnLoading" (addToCartFire_1)="addToCart(this.product?._id||'')"
                     [productId]="this.product?._id+''" [template]="'icon'" />
 
             </li>
@@ -16,8 +17,8 @@
         </ul>
     </div>
 
-    <img [routerLink]="['/product', product?.id]" loading="lazy" class="cursor-pointer rounded-t-lg" [src]="product?.imageCover"
-        alt="" />
+    <img [routerLink]="['/product', product?.id]" loading="lazy" class="cursor-pointer rounded-t-lg"
+        [src]="product?.imageCover" alt="" />
     <div class="p-5">
         <p class="mb-3  text-primary-500 font-semibold dark:text-gray-400">{{product?.category?.name}}</p>
         <h5 class="mb-2 line-clamp-1 text-xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy

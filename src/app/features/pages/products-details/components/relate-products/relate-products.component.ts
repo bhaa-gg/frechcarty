@@ -17,6 +17,7 @@ export class RelateProductsComponent {
 
   customOptions: OwlOptions = {
     margin: 16,
+    
     autoplay: true,
     autoplayHoverPause: true,
     smartSpeed: 800,

@@ -1,16 +1,20 @@
 @if(template === 'icon'){
-<button [disabled]="btnLoading == this.productId" (click)="onClick();$event.stopPropagation()" title="Add to cart"
-[class.hidden]="inCart"
-class="cursor-pointer  text-base transition-all font-semibold hover:text-primary-700">
+<button [disabled]="btnLoading == this.productId" (click)="onClick();$event.stopPropagation()" [title]="inCart ? 'Remove from cart' : 'Add to cart'"
+    class="cursor-pointer    text-base transition-all font-semibold ">
     @if(btnLoading == this.productId){
     <i class="fa-solid  fa-spinner animate-spin"></i>
     }@else{
-    <i class="fa-solid  fa-cart-shopping"></i>
+    @if(!inCart){
+    <i class="fa-solid  hover:text-primary-500 transition-all fa-cart-shopping"></i>
+    }
+    @else {
+    <i class="fa-solid text-red-500 fa-trash-arrow-up"></i>
+    }
+
     }
 </button>
 }@else{
 <button [disabled]="btnLoading == this.productId" (click)="onClick();$event.stopPropagation()" title="Add to cart"
-    class="cursor-pointer  w-full rounded-xl bg-primary-500 hover:bg-primary-400 py-2    text-base transition-all font-semibold text-white">
-    Add to cart <i *ngIf="btnLoading" class="fa-solid  fa-spinner animate-spin"></i> </button>
+    class="cursor-pointer {{inCart ? 'bg-red-500 hover:bg-red-400' : 'bg-primary-500 hover:bg-primary-400'}}  w-full rounded-xl  py-2    text-base transition-all font-semibold text-white">
+    {{inCart ? 'Remove from cart' : 'Add to cart'}}  <i *ngIf="btnLoading" class="fa-solid  fa-spinner animate-spin"></i> </button>
 }
-

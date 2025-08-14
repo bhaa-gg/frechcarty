@@ -1,4 +1,4 @@
-import { Component, EventEmitter,  Input, Output  } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,14 +13,16 @@ export class AddToCartBtnComponent {
   @Input({ required: true }) productId !: string
   @Input() btnLoading!: string
 
-  @Input({ required: true }) inCart!: boolean
+  @Input() inCart!: boolean
 
 
   @Output() addToCartFire_1: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output() deleteFromCart_1: EventEmitter<string> = new EventEmitter<string>();
 
 
   onClick() {
-    this.addToCartFire_1.emit(this.productId)
+    this.inCart ? this.deleteFromCart_1.emit(this.productId) : this.addToCartFire_1.emit(this.productId)
   }
+
 }

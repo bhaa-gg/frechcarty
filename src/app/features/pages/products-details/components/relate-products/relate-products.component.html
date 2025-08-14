@@ -1,9 +1,11 @@
-<section class="space-y-4">
+<section class="space-y-4  ">
     <h2 class="text-4xl font-semibold text-primary-500 " >{{Title}}</h2>
-    <owl-carousel-o class [options]="customOptions">
+    <owl-carousel-o  [options]="customOptions">
         @for (item of Products; track item._id) {
         <ng-template carouselSlide>
-            <Eco-product-card [product]="item" />
+            <div class="py-4">
+                <Eco-product-card [showSide]="false" [product]="item" />
+            </div>
         </ng-template>
         }
     </owl-carousel-o>

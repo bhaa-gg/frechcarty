@@ -9,6 +9,7 @@ import { AddToCartBtnComponent } from "../../../shared/components/business/add-t
 import { RelateProductsComponent } from "./components/relate-products/relate-products.component";
 import { CartService } from '../../../shared/services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
+import { WishlistService } from '../../../shared/services/Wishlist/wishlist.service';
 
 @Component({
   selector: 'Eco-products-details',
@@ -19,17 +20,23 @@ import { ToastrService } from 'ngx-toastr';
 export class ProductsDetailsComponent implements OnInit {
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _productService = inject(ProductService);
+  private readonly _wishlistService = inject(WishlistService)
+
   inCart!: boolean
+  inWish!: boolean
   private readonly _cartService = inject(CartService)
   loadingBtn: string = ''
- private readonly _toaster = inject(ToastrService)
+  private readonly _toaster = inject(ToastrService)
 
+  loadingBtnWish: string = ''
 
   theProduct!: Product
   API_ERROR: boolean = false
   theRelatedProducts: Product[] = []
   theProductImgs!: string[]
   theProductId!: string
+  
+  
   readonly customOptions: OwlOptions = {
     loop: true,
     margin: 16,
@@ -69,6 +76,11 @@ export class ProductsDetailsComponent implements OnInit {
         this.theProductId = res.get('id')!
         this.getProdDetails(this.theProductId)
         this.getItemInCart(this.theProductId)
+      }
+    })
+    this._wishlistService.WhishListData.subscribe({
+      next: (res) => {
+        this.inWish = res.includes(this.theProductId)
       }
     })
   }
@@ -122,9 +134,7 @@ export class ProductsDetailsComponent implements OnInit {
     )
   }
 
-
-
- removeProductFromCart(id: string) {
+  removeProductFromCart(id: string) {
     this.loadingBtn = id
     this._cartService.deleteProductFromCart2(id).subscribe(
       {
@@ -145,6 +155,38 @@ export class ProductsDetailsComponent implements OnInit {
       }
     )
   }
+
+  addToWishlist(id: string) {
+    this.loadingBtnWish = id + ''
+    this._wishlistService.addToWishlist(id).subscribe({
+      next: (res) => {
+        console.log(res);
+        this.loadingBtnWish = ''
+      },
+      error: (err) => {
+        console.log(err);
+        this.loadingBtnWish = ''
+      },
+      complete: () => {
+        this.loadingBtnWish = ''
+      },
+    })
+  }
+  delFromWishlist(id: string) {
+    this.loadingBtnWish = id + ''
+    this._wishlistService.removeFromWishlist(id).subscribe({
+      next: (value) => {
+        this.loadingBtnWish = ''
+      }, error: (err) => {
+        console.log(err);
+        this.loadingBtnWish = ''
+      },
+      complete: () => {
+        this.loadingBtnWish = ''
+      },
+    })
+  }
+
 
 
 }

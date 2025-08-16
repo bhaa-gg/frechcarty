@@ -1,3 +1,8 @@
-<button (click)="$event.stopPropagation()" title="Add to wishlist"
-    class="cursor-pointer  text-base transition-all font-semibold  hover:text-[red]"> <i class="fa-solid fa-heart"></i>
+<button [disabled]="loadingBtnWish == productId+''" (click)="onClick();$event.stopPropagation()" title="Add to wishlist"
+    class="cursor-pointer  text-base transition-all font-semibold {{inWish && 'text-[red]' }} hover:text-[red]"> 
+    @if (loadingBtnWish == productId) {
+        <i class="fa-solid text-[20px]  fa-spinner animate-spin"></i>
+    }@else {
+        <i class="fa-solid text-[20px] fa-heart"></i>
+    }
 </button>

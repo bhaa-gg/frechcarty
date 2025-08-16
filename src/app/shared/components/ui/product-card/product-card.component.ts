@@ -18,19 +18,29 @@ export class ProductCardComponent {
   @Output() addToCartFire_2: EventEmitter<string> = new EventEmitter<string>();
   @Output() deleteFromCart_2: EventEmitter<string> = new EventEmitter<string>();
 
+  @Output() addToWichListFire_2: EventEmitter<string> = new EventEmitter<string>();
+  @Output() deleteFromWichListFire_2: EventEmitter<string> = new EventEmitter<string>();
+
   @Input() btnLoading: string = '';
-  @Input() showSide: boolean  =true;
+  @Input() loadingBtnWish: string = '';
+  @Input() showSide: boolean = true;
   @Input() inCart!: boolean
+  @Input() inWish!: boolean
 
 
 
   addToCart(id: string) {
     this.addToCartFire_2.emit(id);
   }
-
-
   deleteFromCart(id: string) {
     this.deleteFromCart_2.emit(id);
+  }
+
+  addToWichList(id: string) {
+    this.addToWichListFire_2.emit(id);
+  }
+  deleteFromWichList(id: string) {
+    this.deleteFromWichListFire_2.emit(id);
   }
 
 

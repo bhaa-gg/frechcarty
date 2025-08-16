@@ -13,7 +13,7 @@
     <div class="col-span-3 flex items-center justify-center">
       <div class="space-y-4 w-full relative rounded-2xl p-4 shadow-2xl">
         <div class="absolute top-4 right-4">
-          <Eco-add-to-which-list />
+          <Eco-add-to-which-list (addToWichListFire_1)="addToWishlist(this.theProduct?.id||'')"  (deleteFromWichListFire_1)="delFromWishlist(this.theProduct?.id||'')" [loadingBtnWish]="loadingBtnWish" [inWish]="inWish" />
         </div>
         <h2 class="text-2xl font-semibold">{{this.theProduct?.title}}</h2>
         <p class="p-2 text-sm text-gray-400 font-bold">{{this.theProduct?.description}}</p>

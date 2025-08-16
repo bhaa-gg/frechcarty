@@ -31,7 +31,7 @@ export const routes: Routes = [
     },
     {
         path: "",
-        redirectTo :"auth/login",
+        redirectTo: "auth/login",
         pathMatch: "full"
     },
     {
@@ -47,6 +47,16 @@ export const routes: Routes = [
         path: "products",
         canActivate: [authGuard],
         loadComponent: () => import("./features/pages/products/products.component").then(m => m.ProductsComponent)
+    },
+    {
+        path: "checkout",
+        canActivate: [authGuard],
+        loadComponent: () => import("./features/pages/checkout/checkout.component").then(m => m.CheckoutComponent)
+    },
+    {
+        path: "wishlist",
+        canActivate: [authGuard],
+        loadComponent: () => import("./features/pages/wishlist/wishlist.component").then(m => m.WishlistComponent)
     },
     {
         path: "product/:id",

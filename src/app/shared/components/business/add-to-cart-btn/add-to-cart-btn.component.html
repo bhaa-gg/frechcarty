@@ -2,13 +2,13 @@
 <button [disabled]="btnLoading == this.productId" (click)="onClick();$event.stopPropagation()" [title]="inCart ? 'Remove from cart' : 'Add to cart'"
     class="cursor-pointer    text-base transition-all font-semibold ">
     @if(btnLoading == this.productId){
-    <i class="fa-solid  fa-spinner animate-spin"></i>
+    <i class="fa-solid text-[20px]  fa-spinner animate-spin"></i>
     }@else{
     @if(!inCart){
-    <i class="fa-solid  hover:text-primary-500 transition-all fa-cart-shopping"></i>
+    <i class="fa-solid text-[20px] hover:text-primary-500 transition-all fa-cart-shopping"></i>
     }
     @else {
-    <i class="fa-solid text-red-500 fa-trash-arrow-up"></i>
+    <i class="fa-solid text-[20px] text-red-500 fa-trash-arrow-up"></i>
     }
 
     }

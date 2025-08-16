@@ -2,10 +2,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CartService } from '../../../shared/services/cart/cart.service';
 import { CartResponse } from '../../../shared/interfaces/cart';
 import { CurrencyPipe } from '@angular/common';
+import { OrdersComponent } from "../orders/orders.component";
+import { CheckoutComponent } from "../checkout/checkout.component";
 
 @Component({
   selector: 'Eco-cart',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, CheckoutComponent],
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.css'
 })

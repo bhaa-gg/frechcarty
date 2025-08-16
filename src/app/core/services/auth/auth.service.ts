@@ -25,17 +25,14 @@ export class AuthService {
   }
 
   register(userInfo: RegisterUser_Body): Observable<any> {
-    console.log(userInfo);
     return this._http.post(`${this._baseUrl}/auth/signup`, userInfo)
   }
   login(userInfo: LoginUser_Body): Observable<any> {
-    console.log(userInfo);
     return this._http.post(`${this._baseUrl}/auth/signin`, userInfo)
   }
   saveUser() {
     const token = localStorage.getItem('token')
     const user: User = jwtDecode(token!)
-    
     if (token && user) {
       this.authUser.next(user)
     }

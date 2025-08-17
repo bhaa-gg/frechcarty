@@ -1,22 +1,42 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, shareReplay, tap } from 'rxjs';
 import { API_BASE_URL } from '../../../token/api-token';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
-
   private readonly _http = inject(HttpClient);
   private readonly _baseUrl = inject(API_BASE_URL);
+  CacheFlag: boolean = false
+  private Orders$!: Observable<any>;
 
   constructor() { }
 
+  getAllOrders(userId: string): Observable<any> {
+    if (this.CacheFlag) {
+      return this.Orders$
+    }
+    this.Orders$ = this._http.get(`${this._baseUrl}/orders/user/${userId}`).pipe(
+      shareReplay(1),
+      tap(() => {
+        this.CacheFlag = true
+      })
+    );
+    return this.Orders$
+  }
 
-
-  CheckoutSession(cartId: string): Observable<any> {
-    return this._http.post(`${this._baseUrl}/orders/checkout-session/${cartId}?url=http://localhost:4200/orders`, {})
+  CheckoutSession(cartId: string, shippingAddress: {
+    details: string,
+    phone: string,
+    city: string
+  }): Observable<any> {
+    return this._http.post(`${this._baseUrl}/orders/checkout-session/${cartId}?url=http://localhost:4200`, shippingAddress).pipe(
+      tap(() => {
+        this.CacheFlag = false
+      })
+    )
   }
 
 

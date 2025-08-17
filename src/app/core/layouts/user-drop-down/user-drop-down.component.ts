@@ -2,10 +2,11 @@ import { Component, inject, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { map } from 'rxjs';
 import { SlicePipe } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'Eco-user-drop-down',
-  imports: [SlicePipe],
+  imports: [SlicePipe , RouterLink , RouterLinkActive],
   templateUrl: './user-drop-down.component.html',
   styleUrl: './user-drop-down.component.css'
 })

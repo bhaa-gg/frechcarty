@@ -1,1 +1,52 @@
-<p>products works!</p>
+<section class="grid grid-cols-12 gap-4">
+    <!-- Sidebar -->
+    <div class="col-span-12 md:col-span-3 transition-all group bg-gray-100 rounded p-4">
+        <h2 class="text-2xl py-2 group font-semibold">Categories</h2>
+        <ul class="px-2 h-0 group-hover:h-full overflow-hidden space-y-4">
+            <li class="flex items-center gap-2 cursor-pointer">
+                <input (change)="makeNewQueryParams('category', null)" type="radio" name="Category" id="all">
+                <label class="cursor-pointer w-fit font-semibold text-xs text-gray-600" for="all">All</label>
+            </li>
+            <li class="flex items-center gap-2 cursor-pointer" *ngFor="let cat of categories">
+                <input (change)="makeNewQueryParams('category', cat._id)" type="radio" name="Category" [id]="cat.name">
+                <label class="cursor-pointer w-fit font-semibold text-xs text-gray-600" [for]="cat.name">
+                    {{cat.name}}
+                </label>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Products -->
+    <div class="col-span-12 md:col-span-9">
+        @if (loading) {
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            <Eco-product-card-skeleton *ngFor="let skel of [1,2,3,4,5,6,7,8]" />
+        </div>
+        } @else {
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+            @for (prod of this.products; track prod._id ) {
+            <Eco-product-card [loadingBtnWish]='loadingBtnWish' [inWish]="wishlistIds.includes(prod._id+'')"
+                (deleteFromWichListFire_2)="delFromWishlist($event)" (addToWichListFire_2)="addToWishlist($event)"
+                [inCart]="cartIds.includes(prod._id)" [btnLoading]="loadingBtn" (addToCartFire_2)="addToCart($event)"
+                (deleteFromCart_2)="removeProductFromCart($event)" [product]="prod">
+            </Eco-product-card>
+            }
+        </div>
+        }
+    </div>
+</section>
+
+@if(this.products.length) {
+<div class="flex items-center gap-4 mt-6 justify-center">
+    @for (num of metaData.numberOfPages ; track num ) {
+    <button [disabled]="metaData.currentPage == num" (click)="makeNewQueryParams('page', num+'')" class="px-4 py-2 
+               {{metaData.currentPage == num ? 'bg-primary-600' : ''}} 
+               text-sm cursor-pointer font-extrabold transition-all 
+               text-white bg-primary-500 border border-primary-600 
+               rounded-lg hover:bg-primary-400 focus:ring-4 
+               focus:outline-none focus:ring-primary-300">
+        {{num}}
+    </button>
+    }
+</div>
+}

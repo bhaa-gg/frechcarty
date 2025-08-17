@@ -14,9 +14,21 @@ export class ProductService {
 
 
   constructor() { }
-  getProducts(): Observable<any> {
-    if (!this.products$) {
-      this.products$ = this._http.get(`${this._baseUrl}/products`).pipe(
+  getProducts(params?: any): Observable<any> {
+    let httpParams = new HttpParams();
+
+    if (Object.keys(params).length) {
+      Object.keys(params).forEach(key => {
+        if (params[key] !== null && params[key] !== undefined) {
+          httpParams = httpParams.set(key, params[key]);
+        }
+      });
+    }
+    if (!this.products$ || Object.keys(params).length) {
+      
+      this.products$ = this._http.get(`${this._baseUrl}/products`, {
+        params: httpParams
+      }).pipe(
         shareReplay(1)
       );
     }
@@ -25,7 +37,6 @@ export class ProductService {
   getProductsById(id: string): Observable<any> {
     return this._http.get(`${this._baseUrl}/products/${id}`);
   }
-
 
 
   getProductsByCategoryId(id: string): Observable<any> {

@@ -27,7 +27,7 @@ export class RecentProductsComponent implements OnInit {
   private readonly _toaster = inject(ToastrService)
   constructor() { }
 
- 
+
 
   ngOnInit(): void {
     this.getProducts()
@@ -35,8 +35,8 @@ export class RecentProductsComponent implements OnInit {
     this.getWishlistItems()
   }
 
- getProducts() {
-    return this._productService.getProducts().subscribe({
+  getProducts() {
+    return this._productService.getProducts({}).subscribe({
       next: (res) => {
         console.log(res);
         this.products = res.data

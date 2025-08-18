@@ -1,35 +1,46 @@
-<section class="grid grid-cols-12 gap-4">
-    <!-- Sidebar -->
-    <div class="col-span-12 md:col-span-3 transition-all group bg-gray-100 rounded p-4">
-        <h2 class="text-2xl py-2 group font-semibold">Categories</h2>
-        <ul class="px-2 h-0 group-hover:h-full overflow-hidden space-y-4">
-            <li class="flex items-center gap-2 cursor-pointer">
-                <input (change)="makeNewQueryParams('category', null)" type="radio" name="Category" id="all">
-                <label class="cursor-pointer w-fit font-semibold text-xs text-gray-600" for="all">All</label>
-            </li>
-            <li class="flex items-center gap-2 cursor-pointer" *ngFor="let cat of categories">
-                <input (change)="makeNewQueryParams('category', cat._id)" type="radio" name="Category" [id]="cat.name">
-                <label class="cursor-pointer w-fit font-semibold text-xs text-gray-600" [for]="cat.name">
-                    {{cat.name}}
-                </label>
-            </li>
-        </ul>
+<section class="flex justify-start  bg-transparent min-h-[80vh] flex-col gap-4">
+    <div class=" bg-gray-100 rounded p-4  grid md:grid-cols-2 grid-cols-1 gap-4">
+        <div class="">
+            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brands</label>
+            <select (change)="makeC(  $event , 'brand')" id="countries"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="" selected>All</option>
+                <option *ngFor="let brand of brands" [value]="brand._id">{{brand.name}}</option>
+            </select>
+        </div>
+        <div class="">
+            <label for="countries"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categories</label>
+            <select (change)="makeC($event , 'category')" id="countries"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                <option value="" selected>All</option>
+                <option *ngFor="let cat of categories" [value]="cat._id">{{cat.name}}</option>
+            </select>
+        </div>
     </div>
 
     <!-- Products -->
-    <div class="col-span-12 md:col-span-9">
+    <div class="col-span-12 overflow-x-hidden ">
         @if (loading) {
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <Eco-product-card-skeleton *ngFor="let skel of [1,2,3,4,5,6,7,8]" />
         </div>
         } @else {
-        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             @for (prod of this.products; track prod._id ) {
             <Eco-product-card [loadingBtnWish]='loadingBtnWish' [inWish]="wishlistIds.includes(prod._id+'')"
                 (deleteFromWichListFire_2)="delFromWishlist($event)" (addToWichListFire_2)="addToWishlist($event)"
                 [inCart]="cartIds.includes(prod._id)" [btnLoading]="loadingBtn" (addToCartFire_2)="addToCart($event)"
                 (deleteFromCart_2)="removeProductFromCart($event)" [product]="prod">
             </Eco-product-card>
+            }
+            @empty {
+            <div
+                class="flex absolute text-red-500 font-extrabold flex-col gap-5 text-4xl top-1/2 left-1/2 items-center justify-center  transform -translate-x-1/2 -translate-y-1/2  ">
+                <h2>No Products Found</h2>
+                <button (click)="getAllProducts()" class="bg-primary-500 block py-2    text-base transition-all font-semibold  hover:bg-primary-700  cursor-pointer  w-full rounded-xl  text-white" >Get All Products</button>
+                
+            </div>
             }
         </div>
         }

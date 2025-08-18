@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../../shared/services/product/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductCardSkeletonComponent } from "../../../shared/components/ui/product-card-skeleton/product-card-skeleton.component";
@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'Eco-products',
-  imports: [ProductCardSkeletonComponent, ProductCardComponent , CommonModule],
+  imports: [ProductCardSkeletonComponent, ProductCardComponent, CommonModule],
   templateUrl: './products.component.html',
   styleUrl: './products.component.css'
 })
@@ -75,7 +75,7 @@ export class ProductsComponent implements OnInit {
   }
   getProducts(params: any) {
     this.loading = true
-    return this._productService.getProducts(params).subscribe({
+    return this._productService.getProductsParams(params).subscribe({
       next: (res) => {
         console.log(res);
         this.products = res.data
@@ -99,19 +99,19 @@ export class ProductsComponent implements OnInit {
     })
   }
 
-makeNewQueryParams(key: string, value: string | null) {
-  const currentParams = { ...this._activatedRoute.snapshot.queryParams };
-  if (value === null || value === undefined || value === '') {
-    delete currentParams[key];
-  } else {
-    currentParams[key] = value;
-  }
+  makeNewQueryParams(key: string, value: string | null) {
+    const currentParams = { ...this._activatedRoute.snapshot.queryParams };
+    if (value === null || value === undefined || value === '') {
+      delete currentParams[key];
+    } else {
+      currentParams[key] = value;
+    }
 
-  this._router.navigate([], {
-    relativeTo: this._activatedRoute,
-    queryParams: currentParams,
-  });
-}
+    this._router.navigate([], {
+      relativeTo: this._activatedRoute,
+      queryParams: currentParams,
+    });
+  }
 
   getItemInCart() {
     this._cartService.cart$.subscribe({
@@ -201,5 +201,14 @@ makeNewQueryParams(key: string, value: string | null) {
         this.loadingBtnWish = ''
       },
     })
+  }
+  makeC(e: Event, key: string) {
+    const target = e.target as HTMLSelectElement
+    this.makeNewQueryParams(key, target.value)
+  }
+  getAllProducts() {
+    this.makeNewQueryParams('category', null)
+    this.makeNewQueryParams('brand', null)
+    this.makeNewQueryParams('page', '1')
   }
 }

@@ -26,12 +26,19 @@ export class CartComponent implements OnInit {
 
   getCart() {
     this.loading = true
-    this._cartService.getCart().subscribe()
-    this._cartService.cart$.subscribe({
-      next: (res) => {
+    this._cartService.getCart().subscribe({
+       next: (res) => {
         this.cart = res
+        this.loading = false
+      },
+      error: (err) => {
+        console.log(err);
+        this.loading = false
       }
     })
+    // this._cartService.cart$.subscribe({
+     
+    // })
   }
   removeProductFromCart(id: string) {
     // this.loading = true
@@ -55,7 +62,6 @@ export class CartComponent implements OnInit {
 
   }
   updateCartCont(id: string, count: string) {
-    this.loading = true
     this._cartService.updateCartQuantity2(id, count).subscribe(
       //   {
       //   next: (res) => {

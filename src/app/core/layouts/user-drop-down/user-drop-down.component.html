@@ -9,13 +9,13 @@
         class=" absolute transition-all {{DropDownShow ? 'top-[150%]' : '-top-[700%]'}}  right-0 p-4 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-64 dark:bg-gray-700 dark:divide-gray-600">
         <ul class="flex  flex-col gap-4">
             <li>
-                <button routerLinkActive="text-primary-500" [routerLink]="['allorders']" 
+                <button (click)="DropDownShow = false" routerLinkActive="text-primary-500" [routerLink]="['allorders']" 
                     class="block bg-primary-500 h-10 transition-all font-extrabold hover:bg-primary-600  w-full text-white cursor-pointer  rounded-xl  md:border-0  dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                     routerLinkActive="text-primary-500" routerLink="auth">All Orders
                 </button>
             </li>
             <li>
-                <button (click)="signOut()"
+                <button (click)="signOut();DropDownShow = false"
                     class="block bg-primary-500 h-10 transition-all font-extrabold hover:bg-primary-600  w-full text-white cursor-pointer  rounded-xl  md:border-0  dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                     routerLinkActive="text-primary-500" routerLink="auth">Signout <i
                         class="fa-solid fa-right-from-bracket"></i>
@@ -30,8 +30,6 @@
                     <li class="cursor-pointer"><i><i class="text-2xl fa-brands fa-tiktok"></i></i></li>
                 </ul>
             </li>
-
         </ul>
-
     </div>
 </div>

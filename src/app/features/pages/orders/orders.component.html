@@ -1,4 +1,4 @@
-<section>
+<section [class.hidden]="loading" class="space-y-4 min-h-[80vh]">
     @for (order of allOrders; track order._id) {
     <div id="accordion-flush-@order._id" class="border-b border-gray-200 dark:border-gray-700"
         data-accordion="collapse">
@@ -17,7 +17,7 @@
                 [max-height:0] 
                 {{ordersId.includes(order._id) ? '[max-height:500px]' : ''}}">
             <div class="p-5">
-                <div class="grid md:grid-cols-3 gap-3 sm:grid-cols-2 grid-cols-1 ">
+                <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-3 sm:grid-cols-2 grid-cols-1 ">
                     @for (p of order.cartItems; track p._id) {
                     <div class="p-3 space-y-3 rounded-2xl border">
                         <img  [src]="p.product.imageCover" loading="lazy" alt="">
@@ -31,3 +31,6 @@
     </div>
     }
 </section>
+@if(loading){
+        <Eco-loading/>
+}

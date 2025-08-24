@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../../shared/services/product/product.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductCardSkeletonComponent } from "../../../shared/components/ui/product-card-skeleton/product-card-skeleton.component";
@@ -30,9 +30,12 @@ export class ProductsComponent implements OnInit {
   private readonly _brandService = inject(BrandService)
   private readonly _categoryService = inject(CategoryService)
 
+
+
   metaData !: { currentPage: number, limit: number, nextPage: number, numberOfPages: number[] }
   products !: Product[]
   loadingBtn: string = ''
+  CateId!: string
   loadingBtnWish: string = ''
   cartIds!: string[]
   wishlistIds!: string[]
@@ -45,11 +48,11 @@ export class ProductsComponent implements OnInit {
 
     this._activatedRoute.queryParams.subscribe((params) => {
       this.getProducts({ limit: 12, ...params })
+      this.CateId = params['category'] || ''
     })
     this.getItemInCart()
     this.getWishlistItems()
   }
-
 
   getBrandsAndCategories() {
     this._brandService.getBrands().subscribe({
@@ -98,7 +101,6 @@ export class ProductsComponent implements OnInit {
       }
     })
   }
-
   makeNewQueryParams(key: string, value: string | null) {
     const currentParams = { ...this._activatedRoute.snapshot.queryParams };
     if (value === null || value === undefined || value === '') {
@@ -106,6 +108,9 @@ export class ProductsComponent implements OnInit {
     } else {
       currentParams[key] = value;
     }
+
+    console.log(key);
+    console.log(currentParams);
 
     this._router.navigate([], {
       relativeTo: this._activatedRoute,
@@ -208,7 +213,5 @@ export class ProductsComponent implements OnInit {
   }
   getAllProducts() {
     this.makeNewQueryParams('category', null)
-    this.makeNewQueryParams('brand', null)
-    this.makeNewQueryParams('page', '1')
   }
 }

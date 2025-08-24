@@ -25,7 +25,7 @@ export class ProductCardComponent {
   @Input() loadingBtnWish: string = '';
   @Input() showSide: boolean = true;
   @Input() inCart!: boolean
-  @Input() inWish!: boolean
+  @Input() inWish!: boolean 
 
 
 

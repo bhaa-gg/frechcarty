@@ -10,7 +10,7 @@
         </ng-container>
     </owl-carousel-o>
     <div (mouseleave)="hide()"
-        class="absolute overflow-hidden flex items-center justify-between transition-all duration-500 ease-in-out border-t z-50 w-full left-0 top-full bg-gray-100"
+        class="absolute overflow-hidden flex items-center justify-between transition-all duration-500 ease-in-out {{this.SupCategoriesData.length && 'border-t'}} z-40 w-full left-0 top-full bg-gray-100"
         [class.max-h-0]="!SupCategoriesData.length" [class.max-h-[1000px]]="SupCategoriesData.length">
 
         <div class="p-6 gap-3">

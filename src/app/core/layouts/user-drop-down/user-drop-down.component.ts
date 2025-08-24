@@ -1,29 +1,38 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, HostListener, ElementRef } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { map } from 'rxjs';
 import { SlicePipe } from '@angular/common';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'Eco-user-drop-down',
-  imports: [SlicePipe],
+  imports: [SlicePipe, RouterLink, RouterLinkActive],
   templateUrl: './user-drop-down.component.html',
   styleUrl: './user-drop-down.component.css'
 })
 export class UserDropDownComponent implements OnInit {
 
+  UserData!: any
   private readonly _authService = inject(AuthService)
   DropDownShow: boolean = false
   UserName!: string
+  constructor(private eRef: ElementRef) { }
+
   ngOnInit(): void {
     this._authService.authUser.subscribe(res => {
-      if (res) {
-        this.UserName = res.name
-      }
-    })
+      this.UserData = res
+        console.log(res);
+      })
   }
 
 
+  @HostListener("document:click", ["$event"])
+  toggleDropDown(e: Event) {
+    if (this.DropDownShow && !this.eRef.nativeElement.contains(e.target)) {
+      this.DropDownShow = false;
+    }
+  }
   signOut() {
     this._authService.logout()
+    this.UserData = null
   }
 }

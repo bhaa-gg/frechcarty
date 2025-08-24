@@ -14,18 +14,32 @@ export class ProductService {
 
 
   constructor() { }
-  getProducts(): Observable<any> {
+  getProducts(params?: any): Observable<any> {
     if (!this.products$) {
-      this.products$ = this._http.get(`${this._baseUrl}/products`).pipe(
+      this.products$ = this._http.get(`${this._baseUrl}/products`,).pipe(
         shareReplay(1)
       );
     }
     return this.products$
   }
+  getProductsParams(params?: any): Observable<any> {
+    let httpParams = new HttpParams();
+    if (Object.keys(params).length) {
+      Object.keys(params).forEach(key => {
+        if (params[key] !== null && params[key] !== undefined) {
+          httpParams = httpParams.set(key, params[key]);
+        }
+      });
+    }
+    return this._http.get(`${this._baseUrl}/products`, {
+      params: httpParams
+    }).pipe(
+      shareReplay(1)
+    );
+  }
   getProductsById(id: string): Observable<any> {
     return this._http.get(`${this._baseUrl}/products/${id}`);
   }
-
 
 
   getProductsByCategoryId(id: string): Observable<any> {

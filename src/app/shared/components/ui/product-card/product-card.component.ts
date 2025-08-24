@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Product } from '../../../interfaces/product';
+import { Product } from '../../../interfaces/product';  
 import { CurrencyPipe } from '@angular/common';
 import { CheckHideAuthDirective } from '../../../directives/check-hide-auth.directive';
 import { RouterLink } from '@angular/router';
@@ -25,7 +25,7 @@ export class ProductCardComponent {
   @Input() loadingBtnWish: string = '';
   @Input() showSide: boolean = true;
   @Input() inCart!: boolean
-  @Input() inWish!: boolean
+  @Input() inWish!: boolean 
 
 
 

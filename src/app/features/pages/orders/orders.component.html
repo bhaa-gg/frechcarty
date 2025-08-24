@@ -1,1 +1,36 @@
-s
+<section [class.hidden]="loading" class="space-y-4 min-h-[80vh]">
+    @for (order of allOrders; track order._id) {
+    <div id="accordion-flush-@order._id" class="border-b border-gray-200 dark:border-gray-700"
+        data-accordion="collapse">
+        <h2>
+            <button (click)="HandleAccordingClick(order._id)" type="button"
+                class="flex items-center cursor-pointer justify-between bg w-full py-5 font-medium rtl:text-right text-gray-500 dark:text-gray-400 gap-3">
+                <div class="flex w-full items-center justify-between">
+                    <p>Order Price : {{order.totalOrderPrice | currency : 'Egp'}}</p>
+                    <p>day : {{order.createdAt | date : 'dd/MM/yyyy' }}</p>
+                </div>
+                <i class="fa-solid fa-chevron-down transition-transform duration-300"
+                    [class.rotate-180]="ordersId.includes(order._id)"></i>
+            </button>
+        </h2>
+        <div class="overflow-x-scroll transition-all duration-500 ease-in-out
+                [max-height:0] 
+                {{ordersId.includes(order._id) ? '[max-height:500px]' : ''}}">
+            <div class="p-5">
+                <div class="grid md:grid-cols-3 lg:grid-cols-4 gap-3 sm:grid-cols-2 grid-cols-1 ">
+                    @for (p of order.cartItems; track p._id) {
+                    <div class="p-3 space-y-3 rounded-2xl border">
+                        <img  [src]="p.product.imageCover" loading="lazy" alt="">
+                        <p>Count : {{p.count}}</p>
+                        <p>Price : {{p.price | currency : 'Egp'}}</p>
+                    </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</section>
+@if(loading){
+        <Eco-loading/>
+}

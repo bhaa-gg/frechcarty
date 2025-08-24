@@ -9,10 +9,11 @@ import { CartService } from '../../../shared/services/cart/cart.service';
 import { CartResponse } from '../../../shared/interfaces/cart';
 import { UserDropDownComponent } from "../user-drop-down/user-drop-down.component";
 import { WishlistService } from '../../../shared/services/Wishlist/wishlist.service';
+import { WishlistComponent } from "../../../features/pages/wishlist/wishlist.component";
 
 @Component({
   selector: 'Eco-nav-bar',
-  imports: [RouterLink, RouterLinkActive, SidebarComponent, AsyncPipe, UserDropDownComponent],
+  imports: [RouterLink, RouterLinkActive, SidebarComponent, AsyncPipe, UserDropDownComponent, WishlistComponent],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'
 })

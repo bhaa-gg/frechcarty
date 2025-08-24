@@ -16,19 +16,13 @@
                             Home <i class="fa-solid fa-house"></i>
                         </a>
                     </li>
-
-
                     @if (UserData | async) {
-
                     <li>
                         <a routerLinkActive="text-primary-500" [routerLink]="['products']"
                             class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Products
                             <i class="fa-solid fa-bag-shopping"></i> </a>
                     </li>
-                    <li>
-                        <a routerLinkActive="text-primary-500" [routerLink]="['categories']"
-                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Categories</a>
-                    </li>
+
                     <li>
                         <a routerLinkActive="text-primary-500" [routerLink]="['brands']"
                             class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Brands</a>
@@ -37,18 +31,12 @@
                         <a routerLinkActive="text-primary-500" [routerLink]="['cart']"
                             class="block py-2 relative px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
                             Cart <span [class.hidden]="!cart  || !cart?.numOfCartItems"
-                                class="absolute bottom-[50%] text-white font-extrabold text-sm left-full bg-primary-500 flex items-center justify-center rounded-full right-0  w-5 h-5">{{
+                                class="absolute bottom-[50%] text-white font-extrabold text-xs left-full bg-primary-500 flex items-center justify-center rounded-full right-0  w-5 h-5">{{
                                 cart?.numOfCartItems }}</span>
                         </a>
                     </li>
                     <li>
-                        <a routerLinkActive="text-primary-500" [routerLink]="['wishlist']"
-                            class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Wishlist
-                            <span [class.hidden]="!wishlistId?.length "
-                                class="absolute bottom-[50%] text-white font-extrabold text-sm left-full bg-primary-500 flex items-center justify-center rounded-full right-0  w-5 h-5">{{
-                                wishlistId?.length }}</span>
-
-                        </a>
+                        <Eco-wishlist [wishlistId]="wishlistId" />
                     </li>
                     }
 
@@ -58,22 +46,9 @@
         </div>
         <div class="md:flex ms-auto hidden items-center gap-6">
             <ul class="flex items-center gap-2">
-                @if (UserData | async) {
                 <li class="">
                     <Eco-user-drop-down />
                 </li>
-                }
-                @else {
-                <li class="">
-                    <a class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                        routerLinkActive="text-primary-500" routerLink="auth/register">Register</a>
-                </li>
-                <li class="">
-                    <a class="block py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                        routerLinkActive="text-primary-500" routerLink="auth/login">Login</a>
-                </li>
-                }
-
             </ul>
 
         </div>

@@ -1,1 +1,25 @@
-<p>wishlist works!</p>
+<div class="relative w-full">
+    <button (click)="IsHide = !IsHide" type="button"
+        class="block py-2 px-3 cursor-pointer text-gray-900 {{IsHide && 'text-primary-500' }} rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Wishlist
+        <span [class.hidden]="!wishlistId?.length "
+            class="absolute bottom-[50%] text-white font-extrabold text-xs left-full bg-primary-500 flex items-center justify-center rounded-full right-0  w-5 h-5">{{
+            wishlistId?.length }}</span>
+    </button>
+    <div *ngIf="IsHide"
+        class="absolute w-[400px] z-50  -left-28 rounded  top-[190%] max-h-[400px] overflow-y-scroll bg-gray-400  ">
+        @for (item of WishListData; track item._id) {
+        <div class="p-4 flex items-center gap-4 justify-between  border-b border-gray-200">
+            <div class="w-1/4">
+                <img [src]=" item.imageCover" alt="">
+            </div>
+            <div class="w-3/4 space-y-2 ">
+                <h2 class="text-base font-semibold text-gray-100">{{item.title}} </h2>
+                <p class="text-gray-100">${{item.price}} </p>
+                <button (click)="removeItem(item._id)" class="bg-red-500  cursor-pointer hover:bg-red-300 transition-all w-full font-semibold py-2 rounded text-white" >Remove
+                    <i  *ngIf="loading == item._id"  class="fa-solid hidden fa-spinner animate-spin" ></i>  
+                </button>
+            </div> 
+        </div>
+        }
+    </div>
+</div>

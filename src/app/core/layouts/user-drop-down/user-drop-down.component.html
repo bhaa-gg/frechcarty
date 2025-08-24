@@ -1,20 +1,40 @@
 <div class="relative ">
     <button (click)="DropDownShow = !DropDownShow"
         class="bg-primary-500 font-extrabold border border-primary-700 text-white size-10 cursor-pointer rounded-full flex items-center justify-center"
-        type="button">{{UserName | slice:0:1}}
+        type="button">{{UserData ? UserData.name:  "As" | slice:0:1}}
     </button>
 
     <!-- Dropdown menu -->
     <div
         class=" absolute transition-all {{DropDownShow ? 'top-[150%]' : '-top-[700%]'}}  right-0 p-4 bg-white divide-y divide-gray-100 rounded-lg shadow-sm w-64 dark:bg-gray-700 dark:divide-gray-600">
         <ul class="flex  flex-col gap-4">
+            @if (UserData?.name ) {
             <li>
-                <button (click)="signOut()"
+                <button (click)="DropDownShow = false" routerLinkActive="text-primary-500" [routerLink]="['allorders']"
+                    class="block bg-primary-500 h-10 transition-all font-extrabold hover:bg-primary-600  w-full text-white cursor-pointer  rounded-xl  md:border-0  dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    routerLinkActive="text-primary-500" routerLink="auth">All Orders
+                </button>
+            </li>
+            <li>
+                <button (click)="signOut();DropDownShow = false"
                     class="block bg-primary-500 h-10 transition-all font-extrabold hover:bg-primary-600  w-full text-white cursor-pointer  rounded-xl  md:border-0  dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
                     routerLinkActive="text-primary-500" routerLink="auth">Signout <i
                         class="fa-solid fa-right-from-bracket"></i>
                 </button>
             </li>
+            }
+            @else{
+
+            <li class="">
+                <a class="flex items-center justify-center bg-primary-500   h-10 transition-all font-extrabold hover:bg-primary-600  w-full text-white cursor-pointer  rounded-xl  md:border-0  dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    routerLinkActive="text-primary-500" routerLink="auth/register">Register</a>
+            </li>
+            <li class="">
+                <a class="flex items-center justify-center bg-primary-500   h-10 transition-all font-extrabold hover:bg-primary-600  w-full text-white cursor-pointer  rounded-xl  md:border-0  dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
+                    routerLinkActive="text-primary-500" routerLink="auth/login">Login</a>
+            </li>
+            }
+
             <li>
                 <ul class="flex items-center justify-center  gap-4">
                     <li class="cursor-pointer"><i><i class="text-2xl fa-brands fa-facebook"></i></i></li>
@@ -25,6 +45,5 @@
                 </ul>
             </li>
         </ul>
-
     </div>
 </div>

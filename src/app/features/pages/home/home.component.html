@@ -1,9 +1,11 @@
-<div class="flex flex-col gap-7">
+<div class="flex flex-col gap-8">
+   
+    <Eco-category-element />
     <Eco-main-slider />
     <Eco-popular-categories />
-    @defer{
+    <div #relate></div>
+
+    @defer (on viewport(relate) ) {
     <Eco-recent-products />
-    }@placeholder {
-    <div class="">loading....</div>
     }
 </div>

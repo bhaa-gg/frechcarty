@@ -15,8 +15,8 @@
           "options": {
             "fileReplacements": [
               {
-                "replace": "src/app/environments/environment.development.ts",
-                "with": "src/app/environments/environment.ts"
+                "replace": "src/environments/environment.development.ts",
+                "with": "src/environments/environment.ts"
               }
             ],
             "outputPath": "dist/ecomerce-route",

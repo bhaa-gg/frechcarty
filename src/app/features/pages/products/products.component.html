@@ -29,15 +29,18 @@
         } @else {
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             @for (prod of this.products; track prod._id ) {
-            <Eco-product-card [loadingBtnWish]='loadingBtnWish' [inWish]="wishlistIds.includes(prod._id+'')"
-                (deleteFromWichListFire_2)="delFromWishlist($event)" (addToWichListFire_2)="addToWishlist($event)"
-                [inCart]="cartIds.includes(prod._id)" [btnLoading]="loadingBtn" (addToCartFire_2)="addToCart($event)"
-                (deleteFromCart_2)="removeProductFromCart($event)" [product]="prod">
-            </Eco-product-card>
+            <div class="mx-auto">
+                <Eco-product-card [loadingBtnWish]='loadingBtnWish' [inWish]="wishlistIds.includes(prod._id+'')"
+                    (deleteFromWichListFire_2)="delFromWishlist($event)" (addToWichListFire_2)="addToWishlist($event)"
+                    [inCart]="cartIds.includes(prod._id)" [btnLoading]="loadingBtn"
+                    (addToCartFire_2)="addToCart($event)" (deleteFromCart_2)="removeProductFromCart($event)"
+                    [product]="prod">
+                </Eco-product-card>
+            </div>
             }
             @empty {
             <div
-                class="flex absolute text-red-500 font-extrabold flex-col gap-5 text-4xl top-1/2 left-1/2 items-center justify-center  transform -translate-x-1/2 -translate-y-1/2  ">
+                class="flex absolute text-primary-500  font-extrabold flex-col gap-5 text-4xl top-1/2 left-1/2 items-center justify-center  transform -translate-x-1/2 -translate-y-1/2  ">
                 <h2>No Products Found</h2>
                 <button (click)="getAllProducts()"
                     class="bg-primary-500 block py-2    text-base transition-all font-semibold  hover:bg-primary-700  cursor-pointer  w-full rounded-xl  text-white">Get

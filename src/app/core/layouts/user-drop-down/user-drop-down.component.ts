@@ -1,11 +1,10 @@
 import { Component, inject, OnInit, HostListener, ElementRef } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
-import { SlicePipe } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'Eco-user-drop-down',
-  imports: [SlicePipe, RouterLink, RouterLinkActive],
+  imports: [RouterLink, RouterLinkActive],
   templateUrl: './user-drop-down.component.html',
   styleUrl: './user-drop-down.component.css'
 })
@@ -15,13 +14,14 @@ export class UserDropDownComponent implements OnInit {
   private readonly _authService = inject(AuthService)
   DropDownShow: boolean = false
   UserName!: string
+  UserMail!: string
   constructor(private eRef: ElementRef) { }
 
   ngOnInit(): void {
+    this.UserMail = JSON.parse(localStorage.getItem('user')!).email
     this._authService.authUser.subscribe(res => {
       this.UserData = res
-        console.log(res);
-      })
+    })
   }
 
 

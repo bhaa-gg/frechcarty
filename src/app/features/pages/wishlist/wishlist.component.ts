@@ -2,10 +2,12 @@ import { Component, ElementRef, HostListener, inject, Input, OnChanges, OnInit, 
 import { WishlistService } from '../../../shared/services/Wishlist/wishlist.service';
 import { CommonModule } from '@angular/common';
 import { WishList } from '../../../shared/interfaces/cart';
+import { RouterLink } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'Eco-wishlist',
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css'
 })
@@ -15,8 +17,9 @@ export class WishlistComponent implements OnChanges {
   IsHide: boolean = false
   loading!: string
   WishListData !: WishList[]
-  
-  constructor(private eRef: ElementRef) {}
+  private readonly _toaster = inject(ToastrService)
+
+  constructor(private eRef: ElementRef) { }
   getWishlist() {
     this._wishlistService.getWishlist().subscribe(res => {
       this.WishListData = res.data
@@ -49,5 +52,13 @@ export class WishlistComponent implements OnChanges {
         this.loading = ''
       },
     })
+  }
+  handleShow() {
+
+    if (!this.WishListData.length) {
+      this._toaster.error('Wishlist is empty', 'Error', { timeOut: 3000 })
+      return
+    }
+    this.IsHide = !this.IsHide
   }
 }

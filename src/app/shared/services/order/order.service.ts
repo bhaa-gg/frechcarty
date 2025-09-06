@@ -32,7 +32,8 @@ export class OrderService {
     phone: string,
     city: string
   }): Observable<any> {
-    return this._http.post(`${this._baseUrl}/orders/checkout-session/${cartId}?url=http://localhost:4200`, shippingAddress).pipe(
+     const currentUrl = window.location.origin;
+    return this._http.post(`${this._baseUrl}/orders/checkout-session/${cartId}?url=${currentUrl}/#`, shippingAddress).pipe(
       tap(() => {
         this.CacheFlag = false
       })

@@ -21,12 +21,19 @@
                         formControlName="password" />
                     <Eco-error-form-message [control]="password" />
                 </div>
+
                 <button [class.opacity-50]="loginForm.invalid" type="submit"
-                    class="text-white bg-primary-400 w-full hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 cursor-pointer transition-all font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    class="text-white bg-primary-400 w-full  hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 cursor-pointer transition-all font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                     Submit
                     <i *ngIf="loginLoading" class="fa-solid fa-spinner animate-spin"></i>
                 </button>
             </form>
+            <div class="flex items-center my-2  justify-between">
+                <a [routerLink]="['/auth/register']"
+                    class="text-sm font-medium text-primary-600 hover:underline cursor-pointer transition-all dark:text-primary-500">Create
+                    Account</a>
+                <Eco-forget-pass-modal />
+            </div>
         </div>
     </div>
 </div>

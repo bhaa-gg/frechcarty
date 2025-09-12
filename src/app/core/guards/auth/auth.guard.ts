@@ -13,11 +13,11 @@ export const authGuard: CanActivateFn = (route, state) => {
     if (token && userData) {
       try {
         jwtDecode(token!)
-        return true
       } catch (error) {
         _authService.logout();
         return false;
       }
+      return true
     }
     _authService.logout()
     return false;

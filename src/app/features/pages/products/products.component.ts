@@ -214,4 +214,11 @@ export class ProductsComponent implements OnInit {
   getAllProducts() {
     this.makeNewQueryParams('category', null)
   }
+
+  clearAllParams() {
+    this._router.navigate([], {
+      queryParams: {}, // empty params
+      replaceUrl: true, // optional: replace instead of pushing history
+    });
+  }
 }

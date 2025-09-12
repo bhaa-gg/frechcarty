@@ -18,11 +18,11 @@ export const authInterceptor = (req: HttpRequest<any>, next: HttpHandlerFn) => {
     return next(myReq).pipe(
         catchError(err => {
             // _toaster.error(err.error.message, "Error")
-            return throwError(() => {
-                if (err.error.message.toLowerCase().includes('invalid token')) {
-                    _authServices.logout()
-                }
-            });
+            if (err.error.message.toLowerCase().includes('invalid token')) {
+                _authServices.logout()
+            }
+            // return 
+            return throwError(() => err);
         })
     )
 }

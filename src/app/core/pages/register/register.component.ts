@@ -82,6 +82,8 @@ export class RegisterComponent implements OnDestroy, OnInit {
         this._router.navigate(['/auth/login'])
       },
       error: (err) => {
+        console.log(err);
+        
         this.registerLoading = false
         this.responseErrorMessage = err.error.message
       },

@@ -73,6 +73,7 @@ export class LoginComponent implements OnDestroy, OnInit {
 
       },
       error: (err) => {
+        console.log(err);
         this.loginLoading = false
         this.responseErrorMessage = err.error.message
       },

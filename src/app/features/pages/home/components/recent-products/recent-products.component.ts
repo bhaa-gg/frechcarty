@@ -19,8 +19,8 @@ export class RecentProductsComponent implements OnInit {
   private readonly _productService = inject(ProductService)
   private readonly _cartService = inject(CartService)
   private readonly _wishlistService = inject(WishlistService)
-  cartIds!: string[]
-  wishlistIds!: string[]
+  cartIds: string[] = []
+  wishlistIds: string[] = []
 
 
 
@@ -31,8 +31,12 @@ export class RecentProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getProducts()
-    this.getItemInCart()
-    this.getWishlistItems()
+    if (localStorage.getItem('user') && localStorage.getItem('token')) {
+      console.log("data");
+      this.getItemInCart()
+      this.getWishlistItems()
+    }
+
   }
 
   getProducts() {
@@ -136,6 +140,9 @@ export class RecentProductsComponent implements OnInit {
       next: (res) => {
         console.log(res);
         this.loadingBtnWish = ''
+        this._toaster.success(res.message, '', {
+          messageClass: 'text-sm font-semibold ',
+        })
       },
       error: (err) => {
         console.log(err);

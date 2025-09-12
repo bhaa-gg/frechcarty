@@ -1,0 +1,97 @@
+<!-- Modal toggle -->
+<button (click)="isOpenModal = !isOpenModal"
+    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    type="button"
+    class="text-sm font-medium text-primary-600 hover:underline cursor-pointer transition-all dark:text-primary-500">Forgot
+    password?</button>
+
+
+<!-- Main modal -->
+<div
+    class="{{ isOpenModal ? 'fixed' : 'hidden' }} inset-0 z-50 flex justify-center items-center w-full h-full overflow-y-auto overflow-x-hidden bg-black/40">
+    <div class="relative p-4 w-full max-w-2xl max-h-full">
+        <div class="relative bg-white rounded-lg shadow-sm dark:bg-gray-700">
+            <div
+                class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600 border-gray-200">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Forget Password
+                </h3>
+                <button (click)="isOpenModal = false" type="button"
+                    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                    data-modal-hide="default-modal">
+                    <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                        viewBox="0 0 14 14">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                    </svg>
+                    <span class="sr-only">Close modal</span>
+                </button>
+            </div>
+            @if (isOtp == "email") {
+            <form [formGroup]="forget" (ngSubmit)="onSubmits()" class="p-4 md:p-5 space-y-4">
+                <div class="p-5">
+                    <div class="relative z-0 w-full mb-5 space-y-4 group">
+                        <input type="email" formControlName="emails" name="emails" id="emails"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 transition-all appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"
+                            placeholder=" " required />
+                        <label for="emails"
+                            class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform translate-y-0 scale-100 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:font-medium peer-focus:text-primary-600 peer-focus:dark:text-primary-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-valid:-translate-y-6 peer-valid:scale-75">
+                            Email address
+                        </label>
+                        <Eco-error-form-message [control]="emails" />
+                    </div>
+                    <button type="submit" [disabled]="forget.invalid"
+                        class="w-full cursor-pointer disabled:opacity-50 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                        Send Email
+                        <i *ngIf="loading" class="fa-solid fa-spinner animate-spin"></i>
+                    </button>
+                </div>
+            </form>
+            }
+            @else if (isOtp == "otp") {
+            <form class="p-4 md:p-5 space-y-4">
+                <div class="mt-6 flex items-center justify-between gap-2">
+                    @for (item of otp; track $index; let i = $index) {
+                    <input [id]="'otp-' + (i)" type="text" [value]="i" maxlength="1" inputmode="numeric"
+                        pattern="[0-9]*" [(ngModel)]="otp[i]" name="otp{{i}}"
+                        class="w-12 h-14 sm:w-14 sm:h-16 text-center text-xl sm:text-2xl font-medium border rounded-xl focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 border-gray-300 bg-gray-50/80 hover:bg-white" />
+                    }
+                </div>
+                <button (click)="submitForm()" type="button"
+                    class="w-full cursor-pointer disabled:opacity-50 text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+                    Send Otp
+                    <i *ngIf="loading" class="fa-solid fa-spinner animate-spin"></i>
+                </button>
+            </form>
+            }
+            @else {
+            <form (ngSubmit)="onSubmitLogin()" [formGroup]="this.loginForm"
+                class="flex py-4 px-2  flex-col gap-4 w-full">
+                <div class="relative z-0 w-full mb-5 space-y-4 group">
+                    <input type="email" formControlName="email" name="email" id="email"
+                        class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 transition-all appearance-none dark:text-white dark:border-gray-600 dark:focus:border-primary-500 focus:outline-none focus:ring-0 focus:border-primary-600 peer"
+                        placeholder=" " required />
+                    <label for="email"
+                        class="absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform translate-y-0 scale-100 top-3 -z-10 origin-[0] peer-focus:start-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:font-medium peer-focus:text-primary-600 peer-focus:dark:text-primary-500 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-valid:-translate-y-6 peer-valid:scale-75 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto">
+                        Email address
+                    </label>
+                    <Eco-error-form-message [control]="email" />
+                </div>
+                <div class="">
+                    <Eco-password-input [id]="'password'" [labelFor]="'password'" [labelName]="'RePassword'"
+                        formControlName="password" />
+                    <Eco-error-form-message [control]="password" />
+                </div>
+
+                <button [class.opacity-50]="loginForm.invalid" type="submit"
+                    class="text-white bg-primary-400 w-full  hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 cursor-pointer transition-all font-semibold rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    Submit
+                    <i *ngIf="loading" class="fa-solid fa-spinner animate-spin"></i>
+
+                </button>
+            </form>
+            }
+
+        </div>
+    </div>
+</div>

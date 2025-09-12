@@ -3,13 +3,14 @@ import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validator
 import { ErrorFormMessageComponent } from "../../../shared/components/ui/error-form-message/error-form-message.component";
 import { CommonModule, JsonPipe } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { delay, Subscription, timer } from 'rxjs';
 import { PasswordInputComponent } from "../../../shared/components/ui/password-input/password-input.component";
+import { ForgetPassModalComponent } from "../../components/forget-pass-modal/forget-pass-modal.component";
 
 @Component({
   selector: 'Eco-login',
-  imports: [ReactiveFormsModule, ErrorFormMessageComponent, CommonModule, PasswordInputComponent],
+  imports: [ReactiveFormsModule, ErrorFormMessageComponent, CommonModule, PasswordInputComponent, RouterLink, ForgetPassModalComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -58,16 +59,16 @@ export class LoginComponent implements OnDestroy, OnInit {
     if (this.subscriber) this.subscriber.unsubscribe()
     this.subscriber = this._authService.login(this.loginForm.value).subscribe({
       next: (res) => {
-        console.log(res);
+        console.log({ res });
         this.loginLoading = false
         this.responseErrorMessage = ''
         localStorage.setItem('token', res.token)
         localStorage.setItem('user', JSON.stringify(res.user))
-        this._authService.saveUser()
-        this._router.navigate(['/home'])
-        // timer(2000).subscribe(() => {
-        //   this._router.navigate(['/home'])
-        // })
+        this._authService.saveUser(res.user.email)
+        // this._router.navigate(['/home'])
+        timer(2000).subscribe(() => {
+          this._router.navigate(['/home'])
+        })
 
       },
       error: (err) => {
@@ -96,5 +97,8 @@ export class LoginComponent implements OnDestroy, OnInit {
     if (this.subscriber) this.subscriber.unsubscribe()
   }
 
+
+
+ 
 
 }

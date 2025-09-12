@@ -2,7 +2,7 @@ import {
   ApplicationConfig
   , importProvidersFrom, provideZoneChangeDetection
 } from '@angular/core';
-import { provideRouter, withViewTransitions } from '@angular/router';
+import { provideRouter, withHashLocation, withViewTransitions } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import {
@@ -19,6 +19,7 @@ import { provideNoopAnimations } from '@angular/platform-browser/animations';
 export const appConfig: ApplicationConfig = {
   providers: [provideZoneChangeDetection({ eventCoalescing: true })
     , provideRouter(routes
+      ,withHashLocation()
       , withViewTransitions(),
     )
     , importProvidersFrom([BrowserAnimationsModule, BrowserModule])

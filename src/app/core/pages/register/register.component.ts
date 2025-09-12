@@ -9,7 +9,7 @@ import { PasswordInputComponent } from "../../../shared/components/ui/password-i
 
 @Component({
   selector: 'Eco-register',
-  imports: [ReactiveFormsModule, ErrorFormMessageComponent, JsonPipe, CommonModule, PasswordInputComponent],
+  imports: [ReactiveFormsModule, ErrorFormMessageComponent, CommonModule, PasswordInputComponent],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })

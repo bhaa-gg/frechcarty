@@ -46,8 +46,17 @@ export class CartService {
   }
   clearCart2(): Observable<any> {
     return this._http.delete(`${this._baseUrl}/cart`).pipe(
-      tap((updatedCart) => {
-        this.cart$.next(updatedCart);
+      tap(() => {
+        const newCart = {
+          ...this.cart$.value,
+          data: {
+            ...this.cart$.value.data,
+            products: [],
+            totalCartPrice: 0,
+          },
+          numOfCartItems: 0,
+        }
+        this.cart$.next(newCart);
       })
     );;
   }

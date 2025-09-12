@@ -10,10 +10,11 @@ import { RelateProductsComponent } from "./components/relate-products/relate-pro
 import { CartService } from '../../../shared/services/cart/cart.service';
 import { ToastrService } from 'ngx-toastr';
 import { WishlistService } from '../../../shared/services/Wishlist/wishlist.service';
+import { LoadingComponent } from "../../../shared/components/ui/loading/loading.component";
 
 @Component({
   selector: 'Eco-products-details',
-  imports: [CarouselModule, CommonModule, AddToWhichListComponent, AddToCartBtnComponent, RelateProductsComponent],
+  imports: [CarouselModule, CommonModule, AddToWhichListComponent, AddToCartBtnComponent, RelateProductsComponent, LoadingComponent],
   templateUrl: './products-details.component.html',
   styleUrl: './products-details.component.css'
 })
@@ -32,11 +33,12 @@ export class ProductsDetailsComponent implements OnInit {
 
   theProduct!: Product
   API_ERROR: boolean = false
+  loading!: boolean 
   theRelatedProducts: Product[] = []
   theProductImgs!: string[]
   theProductId!: string
-  
-  
+
+
   readonly customOptions: OwlOptions = {
     loop: true,
     margin: 16,
@@ -87,15 +89,19 @@ export class ProductsDetailsComponent implements OnInit {
 
 
   getProdDetails(id: string) {
+    this.loading = true
     this._productService.getProductsById(id).subscribe({
       next: (res) => {
+
         this.theProduct = res.data
         this.theProductImgs = [...res.data.images, res.data.imageCover]
         if (!this.theRelatedProducts.length || !this.theRelatedProducts)
           this.getRelatedProds(res?.data?.category._id)
+
+        this.loading = false
       }, error: (err) => {
         console.log(err);
-
+        this.loading = false
         this.API_ERROR = true
       }
     })

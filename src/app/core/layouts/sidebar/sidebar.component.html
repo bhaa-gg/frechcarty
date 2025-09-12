@@ -9,17 +9,21 @@
     </svg>
 </button>
 
-<!-- Sidebar -->
 <aside
-    class="fixed top-0 {{ !isSidebarOpen ? '-translate-x-full' : 'translate-x-0' }} left-0 md:hidden z-40 w-64 h-screen transition-transform rounded-e-4xl bg-gray-100 dark:bg-gray-900"
-    aria-label="Sidebar">
+    class="fixed top-0 {{ !isSidebarOpen ? '-translate-x-full' : 'translate-x-0' }} left-0 md:hidden z-40 w-64 h-screen transition-transform rounded-e-4xl bg-gray-100 dark:bg-gray-900">
+
+    <button (click)="isSidebarOpen = false"
+        class="absolute top-4 hover:text-primary-600  transition-all text-xl right-4 cursor-pointer">
+        <i class="fa-solid fa-arrow-left "></i>
+    </button>
+
     <div class="h-full px-3 py-4 overflow-y-auto ">
         <a (click)="isSidebarOpen = false" routerLink="" class="flex w-fit items-center space-x-3 rtl:space-x-reverse">
             <img src="icons/freshcart-logo.svg" class="h-8" alt="FreshCart Logo" />
         </a>
         <ul class="space-y-2 font-medium mt-6">
             <li>
-                <a routerLinkActive="text-green-500" [routerLink]="['home']" class="block py-2 hover:text-green-500 px-3 text-gray-900 rounded-sm hover:bg-gray-100 
+                <a (click)="isSidebarOpen = false" routerLinkActive="text-green-500" [routerLink]="['home']" class="block py-2 hover:text-green-500 px-3 text-gray-900 rounded-sm hover:bg-gray-100 
           dark:text-white dark:hover:bg-gray-700 dark:hover:text-white 
           md:border-0 md:hover:text-green-700 md:dark:hover:text-green-500">
                     Home <i class="fa-solid fa-house"></i>
@@ -28,54 +32,22 @@
             @if (UserData | async) {
 
             <li>
-                <a routerLinkActive="text-green-500" [routerLink]="['cart']" class="block py-2 hover:text-green-500 px-3 text-gray-900 rounded-sm hover:bg-gray-100 
+                <a (click)="isSidebarOpen = false" routerLinkActive="text-green-500" [routerLink]="['cart']" class="block py-2 hover:text-green-500 px-3 text-gray-900 rounded-sm hover:bg-gray-100 
           dark:text-white dark:hover:bg-gray-700 dark:hover:text-white 
           md:border-0 md:hover:text-green-700 md:dark:hover:text-green-500">
                     Cart <i class="fa-solid fa-cart-shopping"></i>
                 </a>
             </li>
             <li>
-                <a routerLinkActive="text-green-500" [routerLink]="['products']" class="block py-2 hover:text-green-500 px-3 text-gray-900 rounded-sm hover:bg-gray-100 
+                <a (click)="isSidebarOpen = false" routerLinkActive="text-green-500" [routerLink]="['products']" class="block py-2 hover:text-green-500 px-3 text-gray-900 rounded-sm hover:bg-gray-100 
           dark:text-white dark:hover:bg-gray-700 dark:hover:text-white 
           md:border-0 md:hover:text-green-700 md:dark:hover:text-green-500">
                     Products <i class="fa-solid fa-bag-shopping"></i>
                 </a>
             </li>
-            <li>
-                <a routerLinkActive="text-green-500" [routerLink]="['categories']" class="block py-2 hover:text-green-500 px-3 text-gray-900 rounded-sm hover:bg-gray-100 
-          dark:text-white dark:hover:bg-gray-700 dark:hover:text-white 
-          md:border-0 md:hover:text-green-700 md:dark:hover:text-green-500">
-                    Categories
-                </a>
-            </li>
-            <li>
-                <a routerLinkActive="text-green-500" [routerLink]="['brands']" class="block py-2 hover:text-green-500 px-3 text-gray-900 rounded-sm hover:bg-gray-100 
-          dark:text-white dark:hover:bg-gray-700 dark:hover:text-white 
-          md:border-0 md:hover:text-green-700 md:dark:hover:text-green-500">
-                    Brands
-                </a>
-            </li>
-            }
-        </ul>
-        <ul class="space-y-2 font-medium mt-6">
-            @if (UserData | async) {
-            <li class="">
-                <a class="block hover:text-green-500 py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                    routerLinkActive="text-primary-500" routerLink="auth">Signout <i
-                        class="fa-solid fa-right-from-bracket"></i></a>
-            </li>
-            }@else {
-            <li class="">
-                <a class="block hover:text-green-500 py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                    routerLinkActive="text-primary-500" routerLink="auth/register">Register</a>
-            </li>
-            <li class="">
-                <a class="block hover:text-green-500 py-2 px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent"
-                    routerLinkActive="text-primary-500" routerLink="auth/login">Login</a>
-            </li>
 
             }
-
         </ul>
+
     </div>
 </aside>

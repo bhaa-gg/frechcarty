@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 export class AuthService {
 
 
+
+
   authUser: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
 
   private readonly _http = inject(HttpClient);
@@ -30,12 +32,34 @@ export class AuthService {
   login(userInfo: LoginUser_Body): Observable<any> {
     return this._http.post(`${this._baseUrl}/auth/signin`, userInfo)
   }
-  saveUser() {
+  forgotPasswords(userInfo: { email: string }): Observable<any> {
+    return this._http.post(`${this._baseUrl}/auth/forgotPasswords`, userInfo)
+  }
+  verifyResetCode(resetCode: { resetCode: string }): Observable<any> {
+    return this._http.post(`${this._baseUrl}/auth/verifyResetCode`, resetCode)
+  }
+
+
+  resetPassword(resetCode: { email: string, newPassword: string }): Observable<any> {
+    return this._http.put(`${this._baseUrl}/auth/resetPassword`, resetCode)
+  }
+  verifyToken(): Observable<any> {
+    return this._http.get(`${this._baseUrl}/auth/verifyToken`)
+  }
+  updateMe(me: { email: string, name: string, phone: string }): Observable<any> {
+    return this._http.put(`${this._baseUrl}/users/updateMe/` , {me})
+  }
+
+  saveUser(email?: string) {
     const token = localStorage.getItem('token')
     const user: User = jwtDecode(token!)
-    if (token && user) {
-      this.authUser.next(user)
-    }
+    this.verifyToken().subscribe({
+      next: (res) => {
+        if (token && user) {
+          this.authUser.next({ ...user, email })
+        }
+      }
+    })
   }
 
   isLoggedIn(): boolean {

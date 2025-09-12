@@ -3,10 +3,11 @@ import { CategoryService } from '../../../../../shared/services/category/categor
 import { Category } from '../../../../../shared/interfaces/category';
 import { OwlOptions, CarouselModule } from 'ngx-owl-carousel-o';
 import { Router, RouterLink } from '@angular/router';
+import { LoadingComponent } from "../../../../../shared/components/ui/loading/loading.component";
 
 @Component({
   selector: 'Eco-popular-categories',
-  imports: [CarouselModule],
+  imports: [CarouselModule, LoadingComponent],
   templateUrl: './popular-categories.component.html',
   styleUrl: './popular-categories.component.css'
 })
@@ -15,6 +16,8 @@ export class PopularCategoriesComponent implements OnInit {
   private readonly _categoryService = inject(CategoryService)
   private readonly _router = inject(Router)
 
+
+  loading: boolean = false
   categories !: Category[]
 
   customOptions: OwlOptions = {
@@ -53,14 +56,18 @@ export class PopularCategoriesComponent implements OnInit {
 
 
   getCategories() {
+    this.loading = true
     this._categoryService.getCategories().subscribe({
       next: (res) => {
         this.categories = res.data
+        this.loading = false
       },
-      error(err) {
+      error: (err) => {
         console.log(err);
+        this.loading = false
       },
-      complete() {
+      complete: () => {
+        this.loading = false
       },
     })
   }

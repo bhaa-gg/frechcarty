@@ -37,8 +37,8 @@ export class ProductsComponent implements OnInit {
   loadingBtn: string = ''
   CateId!: string
   loadingBtnWish: string = ''
-  cartIds!: string[]
-  wishlistIds!: string[]
+  cartIds: string[] = []
+  wishlistIds: string[] = []
   loading: boolean = true
   categories !: Category[]
   brands !: Brand[]

@@ -12,7 +12,9 @@ export const authGuard: CanActivateFn = (route, state) => {
     const userData = localStorage.getItem('user');
     if (token && userData) {
       try {
-        jwtDecode(token!)
+        const data = jwtDecode(token!)
+        console.log({ authData: data , token });
+
       } catch (error) {
         _authService.logout();
         return false;

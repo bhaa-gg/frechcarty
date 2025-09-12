@@ -47,19 +47,21 @@ export class AuthService {
     return this._http.get(`${this._baseUrl}/auth/verifyToken`)
   }
   updateMe(me: { email: string, name: string, phone: string }): Observable<any> {
-    return this._http.put(`${this._baseUrl}/users/updateMe/` , {me})
+    return this._http.put(`${this._baseUrl}/users/updateMe/`, { me })
   }
 
-  saveUser(email?: string) {
-    const token = localStorage.getItem('token')
+  saveUser(email?: string, Token?: string) {
+    const token = Token || localStorage.getItem('token')
     const user: User = jwtDecode(token!)
-    this.verifyToken().subscribe({
-      next: (res) => {
-        if (token && user) {
-          this.authUser.next({ ...user, email })
-        }
-      }
-    })
+    if (token && user) {
+      if (email) this.authUser.next({ ...user, email })
+      else this.authUser.next({ ...user })
+    }
+    // this.verifyToken().subscribe({
+    //   next: (res) => {
+
+    //   }
+    // })
   }
 
   isLoggedIn(): boolean {

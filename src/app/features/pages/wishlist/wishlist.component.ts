@@ -11,13 +11,14 @@ import { ToastrService } from 'ngx-toastr';
   templateUrl: './wishlist.component.html',
   styleUrl: './wishlist.component.css'
 })
-export class WishlistComponent implements OnChanges {
+export class WishlistComponent implements OnChanges , OnInit {
   private readonly _wishlistService = inject(WishlistService)
   @Input() wishlistId!: string[];
   IsHide: boolean = false
   loading!: string
   WishListData !: WishList[]
   private readonly _toaster = inject(ToastrService)
+
 
   constructor(private eRef: ElementRef) { }
   getWishlist() {
@@ -26,7 +27,9 @@ export class WishlistComponent implements OnChanges {
       console.log(res.data);
     })
   }
-
+ngOnInit(): void {
+  this.getWishlist()
+}
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
     if (this.IsHide && !this.eRef.nativeElement.contains(event.target)) {
@@ -54,7 +57,6 @@ export class WishlistComponent implements OnChanges {
     })
   }
   handleShow() {
-
     if (!this.WishListData.length) {
       this._toaster.error('Wishlist is empty', 'Error', { timeOut: 3000 })
       return

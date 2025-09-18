@@ -53,10 +53,8 @@ export class AuthService {
   async saveUser(email?: string, Token?: string) {
     const token = Token || localStorage.getItem('token')
     const user: User = await jwtDecode(token!)
-    if (token && user) {
-      if (email) this.authUser.next({ ...user, email })
-      else this.authUser.next({ ...user })
-    }
+    if (email) this.authUser.next({ ...user, email })
+    else this.authUser.next({ ...user })
   }
 
   isLoggedIn(): boolean {

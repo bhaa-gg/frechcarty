@@ -64,8 +64,6 @@ export class LoginComponent implements OnDestroy, OnInit {
         this.responseErrorMessage = ''
         localStorage.setItem('token', res.token)
         localStorage.setItem('user', JSON.stringify(res.user))
-
-        // this._router.navigate(['/home'])
         this._authService.saveUser("", res.token)
         timer(2000).subscribe(() => {
           this._router.navigate(['/home'])

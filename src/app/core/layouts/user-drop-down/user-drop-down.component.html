@@ -3,7 +3,7 @@
         class=" font-extrabold border {{UserData && 'border-primary-700 bg-primary-500' }}  text-white size-10 cursor-pointer rounded-full flex items-center justify-center"
         type="button">
         @if (UserData) {
-        {{ UserData.name.slice(0,1)}}
+        {{ UserData.name.at(0) }}
         }@else {
         <img class="size-10 " src="icons/person.png" alt="">
         }

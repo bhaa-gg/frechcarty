@@ -32,7 +32,8 @@
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                     <td class="p-4 text-center">
-                        <img [src]="itemCart.product.imageCover" alt="product"
+                        <img [src]="itemCart.product.imageCover ||'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-collection-1_large.png?v=1530129113'"
+                            alt="product"
                             class="w-16 md:w-32 p-1 border border-gray-400 rounded-2xl max-h-32 object-cover">
                     </td>
                     <td class="py-4 text-center font-semibold text-gray-900 dark:text-white">
@@ -78,8 +79,8 @@
         @for (itemCart of cart?.data?.products; track itemCart._id) {
         <div class="bg-white dark:bg-gray-800 shadow rounded-xl p-4 flex flex-col gap-3">
             <div class="flex items-center gap-4">
-                <img [src]="itemCart.product.imageCover" alt="product"
-                    class="w-20 h-20 object-cover rounded-xl border" />
+                <img [src]="itemCart.product.imageCover || 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-collection-1_large.png?v=1530129113'"
+                    alt="product" class="w-20 h-20 object-cover rounded-xl border" />
                 <div class="flex-1">
                     <h3 class="font-semibold text-gray-900 dark:text-white">
                         {{itemCart.product.title}}

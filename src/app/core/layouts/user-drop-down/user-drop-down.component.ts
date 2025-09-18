@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, HostListener, ElementRef } from '@angular/core';
+import { Component, inject, OnInit, HostListener, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { AuthService } from '../../services/auth/auth.service';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
@@ -13,7 +13,6 @@ export class UserDropDownComponent implements OnInit {
   UserData!: any
   private readonly _authService = inject(AuthService)
   DropDownShow: boolean = false
-  UserName!: string
   UserMail!: string
   constructor(private eRef: ElementRef) { }
 
@@ -35,4 +34,6 @@ export class UserDropDownComponent implements OnInit {
     this._authService.logout()
     this.UserData = null
   }
+
+
 }

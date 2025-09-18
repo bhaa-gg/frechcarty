@@ -1,10 +1,10 @@
 import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ErrorFormMessageComponent } from "../../../shared/components/ui/error-form-message/error-form-message.component";
-import { CommonModule, JsonPipe } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth/auth.service';
 import { Router, RouterLink } from '@angular/router';
-import { delay, Subscription, timer } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { PasswordInputComponent } from "../../../shared/components/ui/password-input/password-input.component";
 import { ForgetPassModalComponent } from "../../components/forget-pass-modal/forget-pass-modal.component";
 

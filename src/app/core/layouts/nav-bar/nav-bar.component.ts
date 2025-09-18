@@ -27,6 +27,8 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     this.initCartAndWishlist()
     this.UserData = this._authService.authUser
+    console.log({bhaaYse  : this.UserData});
+    
   }
 
 

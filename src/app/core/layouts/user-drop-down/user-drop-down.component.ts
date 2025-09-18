@@ -17,8 +17,10 @@ export class UserDropDownComponent implements OnInit {
   constructor(private eRef: ElementRef) { }
 
   ngOnInit(): void {
-    this.UserMail = JSON.parse(localStorage.getItem('user')!).email
+    this.UserMail = JSON.parse(localStorage.getItem('user')!).email || ''
     this._authService.authUser.subscribe(res => {
+      console.log({ bhaabhaha: res });
+
       this.UserData = res
     })
   }
@@ -34,6 +36,8 @@ export class UserDropDownComponent implements OnInit {
     this._authService.logout()
     this.UserData = null
   }
+
+
 
 
 }

@@ -23,7 +23,13 @@ export class AuthService {
 
   constructor() {
     // afterNextRender : run after server side render and run in browser only
-    afterNextRender(() => this.saveUser());
+    afterNextRender(() => {
+      this.saveUser();
+      if (!this.authUser.getValue()) {
+        this.saveUser();
+
+      }
+    });
   }
 
   register(userInfo: RegisterUser_Body): Observable<any> {

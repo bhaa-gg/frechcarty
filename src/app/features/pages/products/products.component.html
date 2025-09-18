@@ -74,7 +74,7 @@
 <div class="flex items-center gap-4 mt-6 justify-center">
     @for (num of metaData.numberOfPages ; track num ) {
     <button [disabled]="metaData.currentPage == num" (click)="makeNewQueryParams('page', num+'')" class="px-4 py-2 
-               {{metaData.currentPage == num ? 'bg-primary-600' : ''}} 
+               {{metaData.currentPage == num ? 'bg-primary-600 shadow-xl shadow-primary-700' : ''}} 
                text-sm cursor-pointer font-extrabold transition-all 
                 text-white bg-primary-500 border border-primary-600 
                rounded-lg hover:bg-primary-400 focus:ring-4 

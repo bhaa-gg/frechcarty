@@ -1,9 +1,8 @@
 <div
     class="group max-w-sm relative overflow-hidden transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-primary-500 hover:shadow-2xl">
 
-    <!-- القائمة الجانبية -->
-    <div class="absolute top-0 -right-[40%] md:group-hover:right-0 md:group-hover:top-4 transition-all p-4 rounded-s-2xl bg-primary-200"
-        [class.right-0]="showSide">
+    <div
+        class="absolute   top-0 -right-22 group-hover:right-0 group-hover:top-4 group-focus:right-0 group-focus:top-4 transition-all p-4 rounded-s-2xl bg-primary-200">
         <ul class="flex flex-col gap-2">
             <li>
                 <Eco-add-to-cart-btn (deleteFromCart_1)="deleteFromCart(this.product?._id||'')" [inCart]="inCart"
@@ -18,11 +17,9 @@
         </ul>
     </div>
 
-    <!-- صورة المنتج -->
-    <img (click)="showSide = !showSide" [routerLink]="['/product', product?.id]" loading="lazy"
-        class="cursor-pointer w-full h-80 rounded-t-lg" [src]="product?.imageCover" alt="" />
+    <img [routerLink]="['/product', product?.id]" loading="lazy" class="cursor-pointer w-full h-80 rounded-t-lg"
+        [src]="product?.imageCover" alt="" />
 
-    <!-- تفاصيل المنتج -->
     <div class="p-5">
         <p class="mb-3 text-primary-500 font-semibold dark:text-gray-400">
             {{product?.category?.name}}
@@ -35,7 +32,6 @@
         </p>
     </div>
 
-    <!-- السعر والتقييم -->
     <div class="flex items-center justify-between px-5 pb-5">
         <p class="text-gray-600 text-sm font-semibold">
             {{product?.price | currency : 'Egp'}}
@@ -44,5 +40,6 @@
             <i class="fa-solid fa-star text-amber-400"></i>
             {{product?.ratingsAverage}}
         </p>
-    </div>   
+    </div>
+
 </div>

@@ -8,7 +8,7 @@ import { AddToCartBtnComponent } from "../../business/add-to-cart-btn/add-to-car
 
 @Component({
   selector: 'Eco-product-card',
-  imports: [CurrencyPipe, CheckHideAuthDirective, RouterLink, AddToWhichListComponent, AddToCartBtnComponent],
+  imports: [CurrencyPipe, RouterLink, AddToWhichListComponent, AddToCartBtnComponent],
   templateUrl: './product-card.component.html',
   styleUrl: './product-card.component.css'
 })

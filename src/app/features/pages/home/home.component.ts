@@ -8,10 +8,11 @@ import { CommonModule } from '@angular/common';
 import { CategoryService } from '../../../shared/services/category/category.service';
 import { Category } from '../../../shared/interfaces/category';
 import { CategoryElementComponent } from "./components/category-element/category-element.component";
+import { SearcgInputComponent } from "./components/searcg-input/searcg-input.component";
 
 @Component({
   selector: 'Eco-home',
-  imports: [CarouselModule, CommonModule, RecentProductsComponent, PopularCategoriesComponent, MainSliderComponent, LoadingComponent, CategoryElementComponent],
+  imports: [CarouselModule, CommonModule, RecentProductsComponent, PopularCategoriesComponent, MainSliderComponent, LoadingComponent, CategoryElementComponent, SearcgInputComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

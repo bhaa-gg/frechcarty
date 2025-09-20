@@ -23,6 +23,7 @@ enum LoadingP {
 export class CartComponent implements OnInit {
 
   loading!: LoadingP
+  loadingId!: string
   private readonly _cartService = inject(CartService)
   cart!: CartResponse
   ngOnInit(): void {
@@ -53,13 +54,18 @@ export class CartComponent implements OnInit {
   }
   updateCartCont(id: string, count: string) {
     this.loading = LoadingP.update
+    this.loadingId = id
     this._cartService.updateCartQuantity2(id, count).subscribe(
       {
         next: () => {
           this.loading = LoadingP.null
+          this.loadingId = ''
+
         },
         error: () => {
           this.loading = LoadingP.null
+          this.loadingId = ''
+
         }
       }
     )

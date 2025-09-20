@@ -47,7 +47,7 @@
                                 -
                             </button>
                             <span class="font-bold">
-                                @if(loading =='update'){
+                                @if(loading =='update' && loadingId == itemCart.product._id){
                                 <i class="fa-solid fa-spinner animate-spin"></i>
                                 }@else {
                                 {{itemCart.count}}
@@ -106,7 +106,7 @@
                     </button>
 
                     <span class="font-bold">
-                        @if(loading =='update'){
+                        @if(loading =='update'  && loadingId == itemCart.product._id){
                         <i class="fa-solid fa-spinner animate-spin"></i>
                         }@else {
                         {{itemCart.count}}

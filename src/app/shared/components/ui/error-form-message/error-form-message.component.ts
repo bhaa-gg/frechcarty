@@ -5,7 +5,7 @@ import { FromErrMessagePipe } from '../../../Pipes/from-err-message.pipe';
 
 @Component({
   selector: 'Eco-error-form-message',
-  imports: [JsonPipe , FromErrMessagePipe  ],
+  imports: [ FromErrMessagePipe  ],
   templateUrl: './error-form-message.component.html',
   styleUrl: './error-form-message.component.css'
 })

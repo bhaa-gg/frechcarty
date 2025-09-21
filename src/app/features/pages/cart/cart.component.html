@@ -6,19 +6,20 @@
     <div class="flex items-center justify-between flex-wrap gap-3">
         <h2 class="text-2xl md:text-4xl font-semibold text-primary-500">
             Total Cart Items
-            <span [class.hidden]="!cart?.numOfCartItems" class="text-gray-600">
+            <span [class.hidden]="!cart?.numOfCartItems" class="text-gray-600 dark:text-gray-300">
                 ( {{cart?.numOfCartItems}} )
             </span>
         </h2>
-        <p [class.hidden]="!cart?.data?.totalCartPrice" class="text-lg md:text-2xl text-gray-600 font-semibold">
+        <p [class.hidden]="!cart?.data?.totalCartPrice"
+            class="text-lg md:text-2xl text-gray-600 dark:text-gray-300 font-semibold">
             Total Price : {{cart?.data?.totalCartPrice | currency : 'Egp'}}
         </p>
     </div>
 
     <!-- Desktop Table -->
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg hidden md:block">
+    <div class="relative overflow-x-auto shadow-lg sm:rounded-xl hidden md:block">
         <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-300">
                 <tr>
                     <th class="px-6 py-3 text-center">Image</th>
                     <th class="px-6 py-3 text-center">Product</th>
@@ -30,11 +31,11 @@
             <tbody>
                 @for (itemCart of cart?.data?.products; track itemCart._id) {
                 <tr
-                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                    class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 transition">
                     <td class="p-4 text-center">
-                        <img [src]="itemCart.product.imageCover ||'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-collection-1_large.png?v=1530129113'"
+                        <img [src]="itemCart.product.imageCover || 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-collection-1_large.png?v=1530129113'"
                             alt="product"
-                            class="w-16 md:w-32 p-1 border border-gray-400 rounded-2xl max-h-32 object-cover">
+                            class="w-16 md:w-32 p-1 border border-gray-400 dark:border-gray-600 rounded-2xl max-h-32 object-cover">
                     </td>
                     <td class="py-4 text-center font-semibold text-gray-900 dark:text-white">
                         {{itemCart.product.title}}
@@ -43,10 +44,10 @@
                         <div class="flex items-center justify-center gap-2">
                             <button (click)="updateCartCont(itemCart.product._id , (itemCart.count - 1)+'')"
                                 [disabled]="itemCart.count == 1"
-                                class="w-6 cursor-pointer h-6 flex items-center justify-center rounded-full border">
+                                class="w-6 h-6 flex items-center justify-center rounded-full border border-gray-400 dark:border-gray-600 dark:text-white disabled:opacity-50">
                                 -
                             </button>
-                            <span class="font-bold">
+                            <span class="font-bold text-gray-900 dark:text-white">
                                 @if(loading =='update' && loadingId == itemCart.product._id){
                                 <i class="fa-solid fa-spinner animate-spin"></i>
                                 }@else {
@@ -54,7 +55,7 @@
                                 }
                             </span>
                             <button (click)="updateCartCont(itemCart.product._id , (itemCart.count + 1)+'')"
-                                class="w-6 cursor-pointer h-6 flex items-center justify-center rounded-full border">
+                                class="w-6 h-6 flex items-center justify-center rounded-full border border-gray-400 dark:border-gray-600 dark:text-white">
                                 +
                             </button>
                         </div>
@@ -64,7 +65,7 @@
                     </td>
                     <td class="px-6 py-4 text-center">
                         <button (click)="removeProductFromCart(itemCart.product._id)"
-                            class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-400">
+                            class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-400 transition">
                             <i class="fa-regular fa-trash-can"></i>
                         </button>
                     </td>
@@ -80,7 +81,8 @@
         <div class="bg-white dark:bg-gray-800 shadow rounded-xl p-4 flex flex-col gap-3">
             <div class="flex items-center gap-4">
                 <img [src]="itemCart.product.imageCover || 'https://cdn.shopify.com/s/files/1/0533/2089/files/placeholder-images-collection-1_large.png?v=1530129113'"
-                    alt="product" class="w-20 h-20 object-cover rounded-xl border" />
+                    alt="product"
+                    class="w-20 h-20 object-cover rounded-xl border border-gray-300 dark:border-gray-600" />
                 <div class="flex-1">
                     <h3 class="font-semibold text-gray-900 dark:text-white">
                         {{itemCart.product.title}}
@@ -90,7 +92,7 @@
                     </p>
                 </div>
                 <button (click)="removeProductFromCart(itemCart.product._id)" title="Delete"
-                    class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-400">
+                    class="bg-red-500 text-white p-2 rounded-lg hover:bg-red-400 transition">
                     <i class="fa-regular fa-trash-can"></i>
                 </button>
             </div>
@@ -101,19 +103,19 @@
                 <div class="flex items-center gap-2">
                     <button (click)="updateCartCont(itemCart.product._id , (itemCart.count - 1)+'')"
                         [disabled]="itemCart.count == 1"
-                        class="w-8 h-8 cursor-pointer flex items-center justify-center rounded-full border">
+                        class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-gray-600 dark:text-white disabled:opacity-50">
                         -
                     </button>
 
-                    <span class="font-bold">
-                        @if(loading =='update'  && loadingId == itemCart.product._id){
+                    <span class="font-bold text-gray-900 dark:text-white">
+                        @if(loading =='update' && loadingId == itemCart.product._id){
                         <i class="fa-solid fa-spinner animate-spin"></i>
                         }@else {
                         {{itemCart.count}}
                         }
                     </span>
                     <button (click)="updateCartCont(itemCart.product._id , (itemCart.count + 1)+'')"
-                        class="w-8 h-8 cursor-pointer flex items-center justify-center rounded-full border">
+                        class="w-8 h-8 flex items-center justify-center rounded-full border border-gray-400 dark:border-gray-600 dark:text-white">
                         +
                     </button>
                 </div>
@@ -125,7 +127,7 @@
     <!-- Footer Buttons -->
     <div class="grid md:grid-cols-2 grid-cols-1 gap-4">
         <button (click)="clearCart()"
-            class="w-full rounded-xl cursor-pointer bg-red-500 hover:bg-red-400 py-2 text-base font-semibold text-white">
+            class="w-full rounded-xl cursor-pointer bg-red-500 hover:bg-red-400 py-2 text-base font-semibold text-white transition">
             Clear Cart
             <i *ngIf="loading == 'clear'" class="fa-solid fa-spinner animate-spin"></i>
         </button>
@@ -140,7 +142,7 @@
 
         <h2 class="text-2xl md:text-4xl font-semibold text-primary-500">Your Cart is Empty</h2>
         <button routerLink="/products"
-            class="text-white w-full font-extrabold text-lg bg-primary-500 cursor-pointer  hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300  rounded-lg px-5 py-2.5 text-center">
+            class="text-white w-full font-extrabold text-lg bg-primary-500 cursor-pointer hover:bg-primary-600 focus:ring-4 focus:outline-none focus:ring-primary-300 rounded-lg px-5 py-2.5 text-center transition">
             Go To Shopping
         </button>
     </div>

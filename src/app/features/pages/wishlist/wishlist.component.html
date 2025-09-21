@@ -1,26 +1,53 @@
 <div class="relative w-full">
-    <button (click)="handleShow()" type="button"
-        class="block py-2 px-3 cursor-pointer text-gray-900 {{IsHide && 'text-primary-500' }} rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700 md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">Wishlist
-        <span [class.hidden]="!WishListData?.length "
-            class="absolute bottom-[50%] text-white font-extrabold text-xs left-[90%] bg-primary-500 flex items-center justify-center rounded-full right-0  w-5 h-5">{{
-            WishListData?.length }}</span>
+    <!-- Wishlist Button -->
+    <button (click)="handleShow()" type="button" class="block py-2 px-3 cursor-pointer text-gray-900 
+           {{IsHide && 'text-primary-500'}} 
+           rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 
+           md:hover:text-green-700 md:p-0 
+           dark:text-white dark:hover:bg-gray-700 md:dark:hover:text-green-500 
+           md:dark:hover:bg-transparent">
+        Wishlist
+        <span [class.hidden]="!WishListData?.length" class="absolute bottom-[50%] left-[90%] text-white font-extrabold text-xs 
+             bg-primary-500 flex items-center justify-center rounded-full 
+             w-5 h-5">
+            {{ WishListData?.length }}
+        </span>
     </button>
-    <div 
-        class="absolute md:w-[400px] w-[300px] z-50 {{!IsHide ? 'scale-0' : 'scale-100'}}  transition-all md:-left-28 -right-16 rounded  top-[190%] max-h-[400px] overflow-y-scroll bg-primary-900  ">
+
+    <!-- Dropdown -->
+    <div class="absolute md:w-[400px] w-[300px] z-50 
+           {{!IsHide ? 'scale-0' : 'scale-100'}} 
+           transition-all md:-left-28 -right-16 rounded top-[190%] 
+           max-h-[400px] overflow-y-scroll 
+           bg-white dark:bg-gray-900 shadow-lg border border-gray-200 dark:border-gray-700">
+
         @for (item of WishListData; track item._id) {
-        <div class="p-4 relative flex group items-center gap-4 justify-between  border-b border-gray-200">
-            <button (click)="IsHide = !IsHide" routerLink="/product/{{item._id}}" type="button"
-                class="absolute opacity-0 group-hover:opacity-100 transition-all top-2 right-2 size-9 bg-white/50 rounded-full cursor-pointer">
+        <div class="p-4 relative flex group items-center gap-4 justify-between 
+             border-b border-gray-200 dark:border-gray-700">
+
+            <!-- View Button -->
+            <button (click)="IsHide = !IsHide" routerLink="/product/{{item._id}}" type="button" class="absolute opacity-0 group-hover:opacity-100 transition-all 
+               top-2 right-2 size-9 bg-white/50 dark:bg-gray-700/50 
+               text-gray-800 dark:text-gray-200 rounded-full cursor-pointer">
                 <i class="fa-regular fa-eye"></i>
             </button>
+
+            <!-- Image -->
             <div class="w-1/4">
-                <img class="rounded" [src]="item.imageCover" alt="">
+                <img class="rounded border border-gray-200 dark:border-gray-700" [src]="item.imageCover" alt="">
             </div>
-            <div class="w-3/4 space-y-2 ">
-                <h2 class="text-base font-semibold text-gray-100">{{item.title}} </h2>
-                <p class="text-gray-100">${{item.price}} </p>
-                <button (click)="removeItem(item._id)"
-                    class="bg-red-500  cursor-pointer hover:bg-red-300 transition-all w-full font-semibold py-2 rounded text-white">Remove
+
+            <!-- Info -->
+            <div class="w-3/4 space-y-2">
+                <h2 class="text-base font-semibold text-gray-900 dark:text-gray-100">
+                    {{item.title}}
+                </h2>
+                <p class="text-gray-700 dark:text-gray-300">
+                    ${{item.price}}
+                </p>
+                <button (click)="removeItem(item._id)" class="bg-red-500 cursor-pointer hover:bg-red-400 transition-all 
+                 w-full font-semibold py-2 rounded text-white">
+                    Remove
                     <i *ngIf="loading == item._id" class="fa-solid hidden fa-spinner animate-spin"></i>
                 </button>
             </div>

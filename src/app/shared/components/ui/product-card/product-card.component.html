@@ -1,8 +1,12 @@
-<div
-    class="group max-w-sm relative overflow-hidden transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-primary-500 hover:shadow-2xl">
+<div class="group max-w-sm relative overflow-hidden transition-all 
+         bg-white border border-gray-200 rounded-lg shadow-sm 
+         dark:bg-gray-900 dark:border-gray-700 
+         hover:shadow-primary-500 hover:shadow-2xl">
 
-    <div [class.hidden]="!showSide" 
-        class="absolute   md:top-0 md:-right-22 group-hover:right-0 right-0 group-hover:top-4 top-4  transition-all p-4 rounded-s-2xl bg-primary-200">
+    <!-- Side Buttons -->
+    <div [class.hidden]="!showSide" class="absolute md:top-0 md:-right-22 group-hover:right-0 right-0 
+              group-hover:top-4 top-4 transition-all p-4 
+              rounded-s-2xl bg-primary-200 dark:bg-primary-800">
         <ul class="flex flex-col gap-2">
             <li>
                 <Eco-add-to-cart-btn (deleteFromCart_1)="deleteFromCart(this.product?._id||'')" [inCart]="inCart"
@@ -17,29 +21,33 @@
         </ul>
     </div>
 
-    <img [routerLink]="['/product', product?.id]" loading="lazy" class="cursor-pointer w-full h-80 rounded-t-lg"
-        [src]="product?.imageCover" alt="" />
+    <!-- Product Image -->
+    <img [routerLink]="['/product', product?.id]" loading="lazy"
+        class="cursor-pointer w-full h-80 rounded-t-lg object-cover" [src]="product?.imageCover" alt="" />
 
+    <!-- Card Body -->
     <div class="p-5">
-        <p class="mb-3 text-primary-500 font-semibold dark:text-gray-400">
+        <p class="mb-3 text-primary-500 font-semibold dark:text-primary-300">
             {{product?.category?.name}}
         </p>
-        <h5 class="mb-2 line-clamp-1 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+        <h5 class="mb-2 line-clamp-1 text-xl font-bold tracking-tight 
+               text-gray-900 dark:text-white">
             Noteworthy technology {{product?.title}}
         </h5>
-        <p class="mb-3 line-clamp-2 font-normal text-gray-700 dark:text-gray-400">
+        <p class="mb-3 line-clamp-2 font-normal 
+               text-gray-700 dark:text-gray-400">
             {{product?.description}}
         </p>
     </div>
 
+    <!-- Card Footer -->
     <div class="flex items-center justify-between px-5 pb-5">
-        <p class="text-gray-600 text-sm font-semibold">
+        <p class="text-gray-600 dark:text-gray-300 text-sm font-semibold">
             {{product?.price | currency : 'Egp'}}
         </p>
-        <p class="text-gray-600 text-sm font-semibold">
+        <p class="text-gray-600 dark:text-gray-300 text-sm font-semibold">
             <i class="fa-solid fa-star text-amber-400"></i>
             {{product?.ratingsAverage}}
         </p>
     </div>
-
 </div>

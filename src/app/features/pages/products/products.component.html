@@ -1,36 +1,43 @@
-<section class="flex justify-start  bg-transparent min-h-[80vh] flex-col gap-4">
-    <div class="  rounded p-4  grid min-[550px]:grid-cols-2 lg:grid-cols-3  gap-4">
-        <div class="bg-gray-100 p-4 rounded-2xl">
-            <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Brands</label>
-            <select (change)="makeC(  $event , 'brand')" id="countries" class="w-full appearance-none rounded-xl border border-gray-300 bg-white px-4 py-2.5
-             text-sm font-medium text-gray-700 shadow-sm transition-all duration-200
-             focus:border-blue-500 focus:ring-2 focus:ring-blue-400
-             dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 
-             dark:focus:border-blue-500 dark:focus:ring-blue-400">
+<section class="flex justify-start bg-transparent min-h-[80vh] flex-col gap-4">
+    <!-- Filters -->
+    <div class="rounded p-4 grid min-[550px]:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <!-- Brands -->
+        <div class="bg-gray-100 dark:bg-gray-900 p-4 rounded-2xl shadow-sm transition-colors duration-300">
+            <label for="brands" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">Brands</label>
+            <select (change)="makeC($event , 'brand')" id="brands" class="w-full appearance-none rounded-xl border border-gray-300 bg-white px-4 py-2.5
+               text-sm font-medium text-gray-700 shadow-sm transition-all duration-200
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-400
+               dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 
+               dark:focus:border-blue-500 dark:focus:ring-blue-400">
                 <option value="" selected>All</option>
                 <option *ngFor="let brand of brands" [value]="brand._id">{{brand.name}}</option>
             </select>
         </div>
-        <div class="bg-gray-100 p-4 rounded-2xl ">
-            <label for="countries"
-                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Categories</label>
-            <select (change)="makeC($event , 'category')" id="countries" class="w-full appearance-none rounded-xl border border-gray-300 bg-white px-4 py-2.5
-             text-sm font-medium text-gray-700 shadow-sm transition-all duration-200
-             focus:border-blue-500 focus:ring-2 focus:ring-blue-400
-             dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 
-             dark:focus:border-blue-500 dark:focus:ring-blue-400">
+
+        <!-- Categories -->
+        <div class="bg-gray-100 dark:bg-gray-900 p-4 rounded-2xl shadow-sm transition-colors duration-300">
+            <label for="categories"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">Categories</label>
+            <select (change)="makeC($event , 'category')" id="categories" class="w-full appearance-none rounded-xl border border-gray-300 bg-white px-4 py-2.5
+               text-sm font-medium text-gray-700 shadow-sm transition-all duration-200
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-400
+               dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 
+               dark:focus:border-blue-500 dark:focus:ring-blue-400">
                 <option value="" [selected]="!CateId" selected>All</option>
                 <option *ngFor="let cat of categories" [selected]="CateId == cat._id" [value]="cat._id">{{cat.name}}
                 </option>
             </select>
         </div>
-        <div class="bg-gray-100 p-4 rounded-2xl">
-            <label for="sortBy" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sort By</label>
+
+        <!-- Sort -->
+        <div class="bg-gray-100 dark:bg-gray-900 p-4 rounded-2xl shadow-sm transition-colors duration-300">
+            <label for="sort" class="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-200">Sort By</label>
             <select (change)="makeC($event, 'sort')" id="sort" class="w-full appearance-none rounded-xl border border-gray-300 bg-white px-4 py-2.5
-             text-sm font-medium text-gray-700 shadow-sm transition-all duration-200
-             focus:border-blue-500 focus:ring-2 focus:ring-blue-400
-             dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 
-             dark:focus:border-blue-500 dark:focus:ring-blue-400">
+               text-sm font-medium text-gray-700 shadow-sm transition-all duration-200
+               focus:border-blue-500 focus:ring-2 focus:ring-blue-400
+               dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 
+               dark:focus:border-blue-500 dark:focus:ring-blue-400">
                 <option value="" selected>Price: Low to High</option>
                 <option value="-price">Price: High to Low</option>
             </select>
@@ -38,7 +45,7 @@
     </div>
 
     <!-- Products -->
-    <div class="col-span-12 overflow-x-hidden ">
+    <div class="col-span-12 overflow-x-hidden">
         @if (loading) {
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
             <Eco-product-card-skeleton *ngFor="let skel of [1,2,3,4,5,6,7,8]" />
@@ -56,27 +63,29 @@
             </div>
             }
             @empty {
-            <div
-                class="flex w-3/4 absolute text-primary-500  font-extrabold flex-col gap-5 md:text-4xl sm:text-2xl text-xl md:top-1/2 top-[60%] left-1/2 items-center justify-center  transform -translate-x-1/2 -translate-y-1/2  ">
+            <div class="flex w-3/4 absolute text-primary-500 font-extrabold flex-col gap-5 
+                   md:text-4xl sm:text-2xl text-xl md:top-1/2 top-[60%] left-1/2 
+                   items-center justify-center transform -translate-x-1/2 -translate-y-1/2">
                 <h2>No Products Found</h2>
-                <button (click)="clearAllParams()"
-                    class="bg-primary-500 block py-2    text-base transition-all font-semibold  hover:bg-primary-700  cursor-pointer  w-full rounded-xl  text-white">Get
-                    All Products</button>
-
+                <button (click)="clearAllParams()" class="bg-primary-500 block py-2 text-base transition-all font-semibold 
+                     hover:bg-primary-700 cursor-pointer w-full rounded-xl text-white">
+                    Get All Products
+                </button>
             </div>
             }
         </div>
         }
     </div>
-</section> 
+</section>
 
+<!-- Pagination -->
 @if(this.products.length) {
 <div class="flex items-center gap-4 mt-6 justify-center">
     @for (num of metaData.numberOfPages ; track num ) {
     <button [disabled]="metaData.currentPage == num" (click)="makeNewQueryParams('page', num+'')" class="px-4 py-2 
                {{metaData.currentPage == num ? 'bg-primary-600 shadow-xl shadow-primary-700' : ''}} 
                text-sm cursor-pointer font-extrabold transition-all 
-                text-white bg-primary-500 border border-primary-600 
+               text-white bg-primary-500 border border-primary-600 
                rounded-lg hover:bg-primary-400 focus:ring-4 
                focus:outline-none focus:ring-primary-300">
         {{num}}

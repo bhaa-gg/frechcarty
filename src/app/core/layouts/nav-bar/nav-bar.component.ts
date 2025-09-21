@@ -21,8 +21,8 @@ import { SearcgInputComponent } from "../../../features/pages/home/components/se
 export class NavBarComponent implements OnInit {
   UserData!: any
   private readonly _authService = inject(AuthService)
-  private readonly _cartService = inject(CartService)
   private readonly _wishlistService = inject(WishlistService)
+  private readonly _cartService = inject(CartService)
   cart!: CartResponse
   wishlistId!: string[];
   ngOnInit(): void {

@@ -1,7 +1,9 @@
-<div class="dark:bg-gray-900">
-    <Eco-nav-bar />
-<div class="container  pb-5 mx-auto md:w-[85%] w-[90%] ">
-    <router-outlet/>
-</div>
-<Eco-footer/> 
+<div class="h-screen">
+    <div class="dark:bg-gray-900 min-h-screen flex flex-col justify-between">
+        <Eco-nav-bar />
+        <div class="container  pb-5 mx-auto md:w-[85%] w-[90%] ">
+            <router-outlet />
+        </div>
+        <Eco-footer />
+    </div>
 </div>

@@ -1,20 +1,19 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 import { AuthService } from '../../services/auth/auth.service';
-import { User } from '../../interfaces/auth-user';
 import { AsyncPipe } from '@angular/common';
-import { CheckHideAuthDirective } from '../../../shared/directives/check-hide-auth.directive';
 import { CartService } from '../../../shared/services/cart/cart.service';
 import { CartResponse } from '../../../shared/interfaces/cart';
 import { UserDropDownComponent } from "../user-drop-down/user-drop-down.component";
 import { WishlistService } from '../../../shared/services/Wishlist/wishlist.service';
 import { WishlistComponent } from "../../../features/pages/wishlist/wishlist.component";
 import { SearcgInputComponent } from "../../../features/pages/home/components/searcg-input/searcg-input.component";
+import { DarkModeToggleComponent } from "../../../shared/components/ui/dark-mode-toggle/dark-mode-toggle.component";
 
 @Component({
   selector: 'Eco-nav-bar',
-  imports: [RouterLink, RouterLinkActive, SidebarComponent, AsyncPipe, UserDropDownComponent, WishlistComponent, SearcgInputComponent],
+  imports: [RouterLink, RouterLinkActive, SidebarComponent, AsyncPipe, UserDropDownComponent, WishlistComponent, SearcgInputComponent, DarkModeToggleComponent],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'
 })
@@ -28,8 +27,8 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
     this.initCartAndWishlist()
     this.UserData = this._authService.authUser
-    console.log({bhaaYse  : this.UserData});
-    
+    console.log({ bhaaYse: this.UserData });
+
   }
 
 

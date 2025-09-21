@@ -1,0 +1,8 @@
+<button (click)="toggleDarkMode()" class="size-10 bg-gray-200 cursor-pointer dark:bg-gray-700 rounded-full">
+    @if (isDarkMode()) {
+        <i class="fa-solid text-orange-400 fa-sun"></i> 
+    }
+    @else {
+        <i class="fa-solid  fa-moon"></i>
+    }
+</button>

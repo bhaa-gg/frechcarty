@@ -1,31 +1,39 @@
-<div class="bg-gray-100 relative  rounded  w-full">
+<div class="bg-gray-100 dark:bg-gray-800 relative rounded w-full">
     <owl-carousel-o [options]="customOptions">
         <ng-container *ngFor="let cat of categories">
             <ng-template carouselSlide>
                 <div
-                    class="flex py-4 font-bold text-2xl hover:border-b transition-all    justify-center flex-col items-center cursor-pointer">
-                    <span (click)="show(cat._id)" class="text-sm line-clamp-1  text-center w-full ">{{ cat.name
-                        }}</span>
+                    class="flex py-4 font-bold text-2xl hover:border-b transition-all justify-center flex-col items-center cursor-pointer">
+                    <span (click)="show(cat._id)"
+                        class="text-sm line-clamp-1 text-center w-full text-gray-900 dark:text-white">
+                        {{ cat.name }}
+                    </span>
                 </div>
             </ng-template>(mouseenter)="show()"
         </ng-container>
     </owl-carousel-o>
+
+    <!-- Dropdown -->
     <div (mouseleave)="hide()"
-        class="absolute overflow-hidden flex md:flex-row flex-col md:items-center justify-between transition-all duration-500 ease-in-out {{this.SupCategoriesData.length && 'border-t'}} z-40 w-full left-0 top-full bg-gray-100"
+        class="absolute overflow-hidden flex md:flex-row flex-col md:items-center justify-between transition-all duration-500 ease-in-out 
+           {{this.SupCategoriesData.length && 'border-t'}} z-40 w-full left-0 top-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"
         [class.max-h-0]="!SupCategoriesData.length" [class.max-h-[1000px]]="SupCategoriesData.length">
+
+        <!-- Subcategories -->
         <div class="p-6 gap-3">
-            <ul class="flex md:flex-col w-full flex-row  flex-wrap gap-6 md:gap-4">
+            <ul class="flex md:flex-col w-full flex-row flex-wrap gap-6 md:gap-4">
                 <li *ngFor="let item of SupCategoriesData">
                     <button (click)="ProdNavigate(item.category);hide()"
-                        class="text-md hover:text-primary-500 font-bold cursor-pointer">
-                        {{item.name}}
+                        class="text-md hover:text-primary-500 font-bold cursor-pointer text-gray-800 dark:text-gray-200">
+                        {{ item.name }}
                     </button>
                 </li>
             </ul>
         </div>
-        <div class="w-3/4 md:w-1/2 mx-auto  p-5">
+
+        <!-- Image -->
+        <div class="w-3/4 md:w-1/2 mx-auto p-5">
             <img class="w-full rounded max-h-[400px]" [src]="imgCate" alt="">
         </div>
     </div>
-
 </div>

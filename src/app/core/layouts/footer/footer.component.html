@@ -1,26 +1,50 @@
-<footer class="bg-gray-200">
+<footer class="bg-gray-200 dark:bg-gray-900 dark:text-gray-200 transition-colors duration-300">
     <div class="w-[85%] mx-auto space-y-4 py-10">
 
-        <h2 class="text-2xl font-semibold" >Get the FreshCart App</h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
-        <div class="flex items-center md:flex-row gap-4 flex-col  justify-between">
-            <input type="email" placeholder="Enter your email"
-                class="p-2 rounded-[8px] outline-0 !border-gray-400 w-full md:w-[70%]">
-            <button class="bg-primary-700 text-white p-2 py-2 md:w-[28%] w-full px-4 rounded cursor-pointer">Share App Link</button>
+        <!-- Title -->
+        <h2 class="text-2xl font-semibold text-gray-800 dark:text-white">
+            Get the FreshCart App
+        </h2>
+        <p class="text-gray-700 dark:text-gray-400">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit.
+        </p>
+
+        <!-- Email Subscription -->
+        <div class="flex items-center md:flex-row gap-4 flex-col justify-between">
+            <input type="email" placeholder="Enter your email" class="p-2 rounded-lg border border-gray-400 dark:border-gray-600 
+               bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-200 
+               placeholder-gray-500 dark:placeholder-gray-400 w-full md:w-[70%] focus:ring-2 focus:ring-primary-500">
+            <button class="bg-primary-700 hover:bg-primary-800 text-white p-2 py-2 
+               md:w-[28%] w-full px-4 rounded-lg cursor-pointer 
+               transition-colors duration-200">
+                Share App Link
+            </button>
         </div>
-        <div class="border-y border-gray-500 mt-6 gap-4 md:flex-row flex-col  flex    items-center justify-between py-6">
+
+        <!-- Payment + Stores -->
+        <div class="border-y border-gray-400 dark:border-gray-700 mt-6 gap-6 md:flex-row flex-col 
+             flex items-center justify-between py-6">
+
+            <!-- Payment Partners -->
             <ul class="flex items-center gap-4">
-                <li>Payment Partners</li>
-                <li><img src="/imgs/amazon-pay.png" class="w-12" alt=""></li>
-                <li><img src="/imgs/paypal.png" class="w-12" alt=""></li>
-                <li><img src="/imgs/mastercard.webp" class="w-12" alt=""></li>
-                <li><img src="/imgs/amazon-pay.png" class="w-12" alt=""></li>
+                <li class="font-medium">Payment Partners</li>
+                <li><img src="/imgs/amazon-pay.png" class="w-12" alt="Amazon Pay"></li>
+                <li><img src="/imgs/paypal.png" class="w-12" alt="PayPal"></li>
+                <li><img src="/imgs/mastercard.webp" class="w-12" alt="Mastercard"></li>
+                <li><img src="/imgs/visa.png" class="w-12" alt="Visa"></li>
             </ul>
-            <ul class="flex items-center gap-2">
-                <li>Get Delivers With FrechCart</li>
-                <li><img src="/imgs/get-apple-store.png" class="w-20" alt=""></li>
-                <li><img src="/imgs/get-google-play.png" class="w-20" alt=""></li>
+
+            <!-- App Stores -->
+            <ul class="flex items-center gap-3">
+                <li class="font-medium">Get it on</li>
+                <li><img src="/imgs/get-apple-store.png" class="w-24" alt="Apple Store"></li>
+                <li><img src="/imgs/get-google-play.png" class="w-24" alt="Google Play"></li>
             </ul>
+        </div>
+
+        <!-- Bottom -->
+        <div class="pt-6 text-center text-sm text-gray-600 dark:text-gray-500">
+            © 2025 FreshCart™. All Rights Reserved.
         </div>
     </div>
 </footer>

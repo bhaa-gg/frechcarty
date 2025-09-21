@@ -94,7 +94,6 @@ export class SearcgInputComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   clickOutside(event: Event) {
-    console.log("asdjsakld");
     this.finalProducts = []
     this.finalBrands = []
     this.finalCategories = []

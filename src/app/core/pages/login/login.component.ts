@@ -57,14 +57,15 @@ export class LoginComponent implements OnDestroy, OnInit {
     this.loginLoading = true
     this.responseErrorMessage = ''
     if (this.subscriber) this.subscriber.unsubscribe() // unsubscribe previous subscriber to don't make multiple request
+
+
     this.subscriber = this._authService.login(this.loginForm.value).subscribe({
-      next: (res) => {
-        console.log({ res });
+      next: async (res) => {
+        await this._authService.saveUser(undefined, res.token)
         this.loginLoading = false
         this.responseErrorMessage = ''
         localStorage.setItem('token', res.token)
         localStorage.setItem('user', JSON.stringify(res.user))
-        this._authService.saveUser("", res.token)
         timer(2000).subscribe(() => {
           this._router.navigate(['/home'])
         })

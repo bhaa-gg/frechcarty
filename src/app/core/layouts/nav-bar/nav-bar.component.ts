@@ -8,12 +8,11 @@ import { CartResponse } from '../../../shared/interfaces/cart';
 import { UserDropDownComponent } from "../user-drop-down/user-drop-down.component";
 import { WishlistService } from '../../../shared/services/Wishlist/wishlist.service';
 import { WishlistComponent } from "../../../features/pages/wishlist/wishlist.component";
-import { SearcgInputComponent } from "../../../features/pages/home/components/searcg-input/searcg-input.component";
 import { DarkModeToggleComponent } from "../../../shared/components/ui/dark-mode-toggle/dark-mode-toggle.component";
 
 @Component({
   selector: 'Eco-nav-bar',
-  imports: [RouterLink, RouterLinkActive, SidebarComponent, AsyncPipe, UserDropDownComponent, WishlistComponent, SearcgInputComponent, DarkModeToggleComponent],
+  imports: [RouterLink, RouterLinkActive, SidebarComponent, AsyncPipe, UserDropDownComponent, WishlistComponent , DarkModeToggleComponent],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css'
 })

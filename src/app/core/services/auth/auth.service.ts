@@ -21,16 +21,12 @@ export class AuthService {
   private readonly _baseUrl = inject(API_BASE_URL);
   private readonly _router = inject(Router);
 
-  constructor() {
-    // afterNextRender : run after server side render and run in browser only
-    afterNextRender(() => {
-      this.saveUser();
-      if (!this.authUser.getValue()) {
-        this.saveUser();
-
-      }
-    });
-  }
+  // constructor() {
+  //   // afterNextRender : run after server side render and run in browser only
+  //   afterNextRender(() => {
+  //     this.saveUser();
+  //   })
+  // }
 
   register(userInfo: RegisterUser_Body): Observable<any> {
     return this._http.post(`${this._baseUrl}/auth/signup`, userInfo)
@@ -57,10 +53,16 @@ export class AuthService {
   }
 
   async saveUser(email?: string, Token?: string) {
-    const token = Token || localStorage.getItem('token')
-    const user: User = await jwtDecode(token!)
-    if (email) this.authUser.next({ ...user, email })
-    else this.authUser.next({ ...user })
+    const token = Token || localStorage.getItem('token');
+    console.log({ token });
+    
+    if (!token) {
+      this.authUser.next(null);
+      return;
+    }
+    const user: User = await jwtDecode(token);
+    this.authUser.next(email ? { ...user, email } : user);
+    
   }
 
   isLoggedIn(): boolean {

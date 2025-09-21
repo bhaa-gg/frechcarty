@@ -1,8 +1,8 @@
 <div
     class="group max-w-sm relative overflow-hidden transition-all bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 hover:shadow-primary-500 hover:shadow-2xl">
 
-    <div
-        class="absolute   top-0 -right-22 group-hover:right-0 group-hover:top-4 group-focus:right-0 group-focus:top-4 transition-all p-4 rounded-s-2xl bg-primary-200">
+    <div [class.hidden]="!showSide" 
+        class="absolute   md:top-0 md:-right-22 group-hover:right-0 right-0 group-hover:top-4 top-4  transition-all p-4 rounded-s-2xl bg-primary-200">
         <ul class="flex flex-col gap-2">
             <li>
                 <Eco-add-to-cart-btn (deleteFromCart_1)="deleteFromCart(this.product?._id||'')" [inCart]="inCart"

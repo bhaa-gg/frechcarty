@@ -1,15 +1,47 @@
-<form class="flex w-3/4 items-center  mx-auto">
-    <div class="relative w-full">
-        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="none" viewBox="0 0 18 20">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                    d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
-            </svg>
+<div class="relative mx-auto  w-3/4">
+    <form class="flex w-full items-center  mx-auto">
+        <div class="relative w-full">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2" />
+                </svg>
+            </div>
+            <input (input)="search($event)" type="text" id="simple-search"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="Search branch name..." required />
         </div>
-        <input (input)="search($event)" type="text" id="simple-search"
-            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-            placeholder="Search branch name..." required />
-    </div>
 
-</form>
+    </form>
+    @if(finalProducts.length || finalBrands.length || finalCategories.length){
+    <div class="w-full rounded-2xl absolute p-4  top-12 bg-white overflow-y-scroll  max-h-96 z-50">
+        @if(finalProducts.length ){
+        <p class=" text-primary-500 py-4 text-[20px] font-bold">Products</p>
+        <div class="space-y-4 ">
+            @for (item of finalProducts; track item._id) {
+            <p routerLink="/product/{{item._id}}" class="cursor-pointer hover:text-primary-500 font-bold">{{item.name || item.title}}</p>
+            }
+        </div>
+        }
+        @if(finalCategories.length ){
+        <p class=" text-blue-500 py-4 text-[20px] font-bold">Categories</p>
+        <div class="space-y-4 ">
+            @for (item of finalCategories; track item._id) {
+            <p (click)="navToProducts(item._id , 'category')" class="cursor-pointer hover:text-blue-500 font-bold">{{item.name || item.title}}</p>
+            }
+        </div>
+        }
+
+        @if(finalBrands.length ){ 
+        <p class=" text-red-500 py-4 text-[20px] font-bold">Brands</p>
+        <div class="space-y-4 ">
+            @for (item of finalBrands; track item._id) { 
+            <p   (click)="navToProducts(item._id , 'brand')" class="cursor-pointer hover:text-red-500 font-bold">{{item.name || item.title}}</p>
+            }
+        </div>
+        }
+
+    </div>
+    }
+</div>

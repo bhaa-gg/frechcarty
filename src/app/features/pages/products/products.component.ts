@@ -102,6 +102,7 @@ export class ProductsComponent implements OnInit {
     })
   }
   makeNewQueryParams(key: string, value: string | null) {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     const currentParams = { ...this._activatedRoute.snapshot.queryParams };
     if (value === null || value === undefined || value === '') {
       delete currentParams[key];

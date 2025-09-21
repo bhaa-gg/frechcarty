@@ -32,10 +32,11 @@
             @if (UserData | async) {
 
             <li>
-                <a (click)="isSidebarOpen = false" routerLinkActive="text-green-500" [routerLink]="['cart']" class="block py-2 hover:text-green-500 px-3 text-gray-900 rounded-sm hover:bg-gray-100 
-          dark:text-white dark:hover:bg-gray-700 dark:hover:text-white 
-          md:border-0 md:hover:text-green-700 md:dark:hover:text-green-500">
-                    Cart <i class="fa-solid fa-cart-shopping"></i>
+                <a routerLinkActive="text-primary-500" [routerLink]="['cart']"
+                    class="block py-2 relative px-3 text-gray-900 rounded-sm hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-green-700  w-fit md:p-0 dark:text-white md:dark:hover:text-green-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent">
+                    Cart <span [class.hidden]="!cart  || !cart?.numOfCartItems"
+                        class="absolute  text-white font-extrabold text-xs left-full bg-primary-500 flex items-center justify-center rounded-full top-0   w-5 h-5">{{
+                        cart?.numOfCartItems }}</span>
                 </a>
             </li>
             <li>

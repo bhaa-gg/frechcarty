@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, HostListener, inject, OnInit } from '@angular/core';
 import { ProductService } from '../../../../../shared/services/product/product.service';
 import { CategoryService } from '../../../../../shared/services/category/category.service';
 import { BrandService } from '../../../../../shared/services/brand/brand.service';
@@ -92,4 +92,11 @@ export class SearcgInputComponent implements OnInit {
   }
 
 
+  @HostListener('document:click', ['$event'])
+  clickOutside(event: Event) {
+    console.log("asdjsakld");
+    this.finalProducts = []
+    this.finalBrands = []
+    this.finalCategories = []
+  }
 }

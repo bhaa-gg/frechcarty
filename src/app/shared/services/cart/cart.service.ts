@@ -11,10 +11,7 @@ export class CartService {
   private readonly _http = inject(HttpClient)
   private readonly _baseUrl = inject(API_BASE_URL)
   cart$: BehaviorSubject<any> = new BehaviorSubject<any>(null)
-
-
   fromCahced: boolean = false
-
   constructor() { }
   getCart(): Observable<any> {
     if (!this.cart$.value || !this.fromCahced) {
@@ -33,6 +30,7 @@ export class CartService {
   updateCartQuantity2(id: string, number: string): Observable<any> {
     return this._http.put(`${this._baseUrl}/cart/${id}`, { count: number }).pipe(
       tap((updatedCart) => {
+        console.log({ updatedCart });
         this.cart$.next(updatedCart);
       })
     );

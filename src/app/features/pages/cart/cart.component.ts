@@ -49,7 +49,18 @@ export class CartComponent implements OnInit {
     // })
   }
   removeProductFromCart(id: string) {
-    this._cartService.deleteProductFromCart2(id).subscribe()
+    this.loading = LoadingP.delete
+    this.loadingId = id
+    this._cartService.deleteProductFromCart2(id).subscribe({
+      next: () => {
+        this.loading = LoadingP.null
+        this.loadingId = ''
+      },
+      error: (err) => {
+        this.loading = LoadingP.null
+        this.loadingId = ''
+      }
+    })
 
   }
   updateCartCont(id: string, count: string) {

@@ -18,7 +18,6 @@ export class UserDropDownComponent implements OnInit {
 
   ngOnInit(): void {
     this.UserMail = JSON.parse(localStorage.getItem('user')!).email || ''
-
     this._authService.authUser.subscribe(res => {
       this.UserData = res
     })

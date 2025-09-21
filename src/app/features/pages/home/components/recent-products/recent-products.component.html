@@ -9,6 +9,7 @@
                 (deleteFromWichListFire_2)="delFromWishlist($event)" (addToWichListFire_2)="addToWishlist($event)"
                 [inCart]="cartIds.includes(prod._id) || false" [btnLoading]="loadingBtn"
                 (addToCartFire_2)="addToCart($event)" (deleteFromCart_2)="removeProductFromCart($event)"
+                [showSide]="true" 
                 [product]="prod"></Eco-product-card>
         </div>
         }
